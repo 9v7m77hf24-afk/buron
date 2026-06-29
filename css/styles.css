@@ -18,8 +18,12 @@ html, body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(to bottom, #1e1e2f, #2b2b45);
+  /*background: linear-gradient(to bottom, #1e1e2f, #2b2b45);*/
+  background-image: url("../img/view1.jpg");
   background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* ---------- Nav ---------- */

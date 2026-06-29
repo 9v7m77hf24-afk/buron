@@ -1,4 +1,4 @@
-const CACHE_NAME = "guide-du-buron-v4";
+const CACHE_NAME = "guide-du-buron-v1";
 
 const FILES_TO_CACHE = [
   "./index.html",
@@ -7,7 +7,9 @@ const FILES_TO_CACHE = [
   "./css/styles.css",
   "./js/main.js",
   "./js/router.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./img/logo.png",
+  "./img/view1.jpg"
 ];
 
 self.addEventListener("install", event => {
