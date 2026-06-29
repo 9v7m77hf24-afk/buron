@@ -6,7 +6,7 @@ async function loadPage(page, push = true) {
 
   let html;
   try {
-    const res = await fetch(`pages/${page}.html`);
+    const res = await fetch(`./${page}.html`);
     if (!res.ok) throw new Error(`Page not found: ${page}`);
     html = await res.text();
   } catch (err) {
