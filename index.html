@@ -17,22 +17,34 @@
   <!-- Persistent background, never reloaded between pages -->
   <div class="background"></div>
 
-  <nav class="nav">
-    <a href="#" data-page="about" class="nav-logo-link" aria-label="Go to home">
+  <header class="nav">
+    <a href="#" data-page="home" class="nav-logo-link" aria-label="Go to home">
       <img src="./img/logo-192.png" alt="Logo" class="nav-logo">
     </a>
-  </nav>
+  </header>
 
   <main id="content">
       <!-- Page content gets injected here by router.js -->
   </main>
 
-  <!--
-  <footer class="footer">
-    <p>&copy; 2026 My PWA. All rights reserved.</p>
+  <footer class="bottom-nav" id="bottomNav">
+    <!-- Arrows &#9664/&#9654 -->
+    <button class="nav-arrow" id="navBack" aria-label="Go back">&#10094;</button>
+    
+    <a href="#" data-page="home" class="nav-link">
+      <img src="./img/house_br.png" alt="" class="nav-icon">
+      <!--<span>Accueil</span>-->
+    </a>
+    <!--
+    <a href="#" data-page="about" class="nav-link">Infos</a>
+    -->
+    
+    <button class="nav-arrow" id="navForward" aria-label="Go forward">&#10095;</button>
   </footer>
--->
-  <script src="./js/router.js"></script>
+
+  <script src="./js/router.js"></script>  
+  <script src="./js/header_nav.js"></script> 
+  <script src="./js/footer_nav.js"></script>
   <script src="./js/main.js"></script>
 </body>
 </html>

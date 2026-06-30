@@ -10,7 +10,8 @@ const FILES_TO_CACHE = [
   "./manifest.json",
   "./img/logo.png",
   "./img/logo-192.png",
-  "./img/view1.jpg"
+  "./img/view1.jpg",
+  "./img/house.png"
 ];
 ss
 self.addEventListener("install", event => {
