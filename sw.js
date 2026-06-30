@@ -9,9 +9,10 @@ const FILES_TO_CACHE = [
   "./js/router.js",
   "./manifest.json",
   "./img/logo.png",
+  "./img/logo-192.png",
   "./img/view1.jpg"
 ];
-
+ss
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
