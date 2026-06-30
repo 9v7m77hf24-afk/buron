@@ -3,7 +3,7 @@ const CACHE_NAME = "guide-du-buron-v1";
 const FILES_TO_CACHE = [
   "./index.html",
   "./home.html",
-  "./about.html",
+  "./leburon.html",
   "./css/styles.css",
   "./js/main.js",
   "./js/router.js",
@@ -13,7 +13,7 @@ const FILES_TO_CACHE = [
   "./img/view1.jpg",
   "./img/house.png"
 ];
-ss
+
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
