@@ -14,6 +14,8 @@
 @media (orientation: landscape) {
   .page {
     width: min(100vw, 800px);
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
