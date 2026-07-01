@@ -3,7 +3,7 @@
 .page {
   padding: 35px 55px;
   text-align: justify;
-  background: rgba(252, 252, 252, 0.8);
+  background: rgba(252, 252, 252, 2.8);
 box-sizing: border-box;
   /* Fixed width, identical in portrait and landscape.
      min(100vw, 100vh) always resolves to the smaller of the two dimensions.
@@ -14,7 +14,9 @@ box-sizing: border-box;
   margin: 0 auto;
 }
 
-/
+.page h1 {
+  color:red;
+}
 
 /* -------- LeBuron TIMELINE -------- */
  .timeline {
