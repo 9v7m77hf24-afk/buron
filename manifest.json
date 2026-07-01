@@ -1,6 +1,6 @@
 {
   "name": "Guide du Tournel v2",
-  "short_name": "tuide du tournel v2",
+  "short_name": "guide du tournel v2",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1e1e2f",
