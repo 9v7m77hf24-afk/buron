@@ -1,23 +1,20 @@
 
 /* ---------- PAGES SETUP ---------- */
 .page {
-  padding:4% 70px;
-  /*margin:0 15%;*/
+  padding: 35px 55px;
   text-align: justify;
   background: rgba(252, 252, 252, 0.8);
-  /* Portrait (default): fill the screen, no side margin */
-  width: 100%;
+box-sizing: border-box;
+  /* Fixed width, identical in portrait and landscape.
+     min(100vw, 100vh) always resolves to the smaller of the two dimensions.
+     On a physical device, portrait width == landscape height (roughly),
+     so this locks onto that same measurement no matter how it's rotated.
+     Padding above stays constant; margin below is what shifts to center it. */
+  width: min(100vw, 100vh);
   margin: 0 auto;
 }
 
-/* Landscape: use more of the screen instead of collapsing to portrait width */
-@media (orientation: landscape) {
-  .page {
-    width: min(100vw, 800px);
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
+/
 
 /* -------- LeBuron TIMELINE -------- */
  .timeline {
