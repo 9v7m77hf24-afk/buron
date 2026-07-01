@@ -15,6 +15,7 @@ const FILES_TO_CACHE = [
   "./js/header_nav.js",
   "./js/footer_nav.js",
   "./manifest.json",
+  "./img/view1.jpg",
   "./img/logo.png",
   "./img/logo-192.png",
   "./img/house.png",
