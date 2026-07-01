@@ -1,7 +1,7 @@
 
 /* ---------- PAGES SETUP ---------- */
 .page {
-  padding:3% 5%;
+  padding:4% 6%;
   /*margin:0 15%;*/
   text-align: justify;
   background: rgba(252, 252, 252, 0.8);
@@ -13,7 +13,7 @@
 /* Landscape: use more of the screen instead of collapsing to portrait width */
 @media (orientation: landscape) {
   .page {
-    width: min(100vw, 1000px);
+    width: min(100vw, 800px);
   }
 }
 
