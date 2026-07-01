@@ -18,6 +18,7 @@ const FILES_TO_CACHE = [
   "./img/view1.jpg",
   "./img/logo.png",
   "./img/logo-192.png",
+  "./img/logo-512.png",
   "./img/house.png",
   "./img/icon1.png",
   "./img/icon2.png",
