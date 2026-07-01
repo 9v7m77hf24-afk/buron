@@ -1,8 +1,7 @@
 
 /* ---------- PAGES SETUP ---------- */
 .page {
-  padding: 35px 55px;
-  margin: 30px;
+  padding: 10px 15px;
   text-align: justify;
   background: rgba(252, 252, 252, 0.8);
 box-sizing: border-box;
@@ -11,7 +10,7 @@ box-sizing: border-box;
      On a physical device, portrait width == landscape height (roughly),
      so this locks onto that same measurement no matter how it's rotated.
      Padding above stays constant; margin below is what shifts to center it. */
-  width: 800px;
+  width: 650px;
   margin: 0 auto;
 }
 
