@@ -2,9 +2,15 @@
 /* ---------- PAGES SETUP ---------- */
 .page {
   padding:3% 5%;
-  margin:0 15%;
+  /*margin:0 15%;*/
   text-align: justify;
   background: rgba(252, 252, 252, 0.8);
+  /* Fixed width = PORTRAIT viewport width in both orientations.
+  Always resolves to the smaller of the two dimensions */  
+  width: min(100vw, 100vh);
+  max-width: 800px;   /* safety cap for larger tablets/desktops */
+  margin: 0 auto;     /* centers it; in portrait this collapses to 0 anyway */
+  /*box-sizing: border-box;*/
 }
 
 /* -------- LeBuron TIMELINE -------- */
