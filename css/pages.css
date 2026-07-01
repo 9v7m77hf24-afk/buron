@@ -2,6 +2,7 @@
 /* ---------- PAGES SETUP ---------- */
 .page {
   padding: 35px 55px;
+  margin: 30px;
   text-align: justify;
   background: rgba(252, 252, 252, 0.8);
 box-sizing: border-box;
@@ -15,7 +16,7 @@ box-sizing: border-box;
 }
 
 .page h1 {
-  color:blue;
+  color:green;
 }
 
 /* -------- LeBuron TIMELINE -------- */
