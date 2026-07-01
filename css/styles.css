@@ -1,4 +1,7 @@
-/* ---------- Reset / base ---------- */
+/* ---------- index.html ------------*/
+/* ----------- home.html ------------*/
+
+/* ---------- Reset / base --------- */
 * {
   box-sizing: border-box;
 }
@@ -70,13 +73,6 @@ html, body {
   opacity: 0;
 }
 
-.page {
-  padding:3% 5%;
-  margin:0 15%;
-  text-align: justify;
-  background: rgba(252, 252, 252, 0.8);
-}
-
 /* ---------- Bottom nav (scroll-aware) ---------- */
 .bottom-nav {
   position: fixed;
@@ -98,6 +94,10 @@ html, body {
 
 .bottom-nav.visible {
   transform: translateY(0);
+}
+
+.bottom-nav.hidden {
+  display: none;
 }
 
 .nav-arrow {
@@ -147,7 +147,7 @@ html, body {
   display: block;
 }
 
-/* ---------- MENU ---------- */
+/* ---------- HOME MENU ---------- */
 .page_menu {
   padding:3% 5%;
   margin:0 15%;
@@ -212,5 +212,3 @@ html, body {
   background: rgba(0, 0, 0, 0.75);
   transform: scale(1.05);
 }
-
-

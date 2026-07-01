@@ -34,6 +34,12 @@ async function loadPage(page, push = true, entryId = null) {
     content.innerHTML = html;
     content.classList.remove('fading');
     bindPageLinks();  // re-bind, since #content's links are new DOM nodes
+
+    // re-run any page-specific init (e.g. the photo carousel on leburon.html);
+    // safe no-op on pages that don't have a .slide element
+    if (typeof initGalleryCarousel === 'function') {
+      initGalleryCarousel();
+    }
   }, FADE_MS);
 
   if (push) {

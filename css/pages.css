@@ -1,0 +1,252 @@
+
+/* ---------- PAGES SETUP ---------- */
+.page {
+  padding:3% 5%;
+  margin:0 15%;
+  text-align: justify;
+  background: rgba(252, 252, 252, 0.8);
+}
+
+/* -------- LeBuron TIMELINE -------- */
+ .timeline {
+    position: relative;
+    max-width: 700px;
+    margin: 40px auto 0 auto;
+  }
+
+.item {
+    position: relative;
+}
+
+.item::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 16px;          /* starts just below the dot */
+    bottom: -10px;      /* extends into the next item */
+    border-left: 4px dotted red;
+    transform: translateX(-50%);
+}
+
+.item:last-child::after {
+    display: none;
+}
+
+  /* the red dot marker on the line */
+  .mark {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    background: #e53228;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .content_timeline {
+    width: 50%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    /*background-color:pink;*/
+    height: 100px;
+  }
+
+  /* odd items: text on the LEFT, right-aligned */
+  .item:nth-child(odd) .content_timeline {
+    margin-right: 50%;
+    text-align: right;
+  }
+
+  /* even items: text on the RIGHT, left-aligned */
+  .item:nth-child(even) .content_timeline {
+    margin-left: 50%;
+    text-align: left;
+  }
+
+  .date {
+    color: #e53228;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 0 4px 0;
+  }
+
+  .desc {
+    color: #1a1a1a;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* ---------- LeBuron GALERY ---------- */
+    .carousel {
+    position: relative;
+    max-width: 700px;
+    margin: 30px auto 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #eee;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .carousel-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+  }
+
+  .caption-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 18px;
+    background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+    color: #fff;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .expand-btn {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .expand-btn:hover {
+    background: #e53228;
+  }
+
+  /* --- CAROUSEL ARROWS --- */
+  .car-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    font-size: 1.3rem;
+    color: #1a1a1a;
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  .car-btn:hover {
+    background: #e53228;
+    color: #fff;
+  }
+
+  .car-btn.prev { left: 14px; }
+  .car-btn.next { right: 14px; }
+
+  /* --- DOTS --- */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #d9d9d9;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: background 0.2s ease;
+  }
+
+  .dot.active {
+    background: #e53228;
+  }
+
+  /* --- FULLSCREEN VIEWER --- */
+  .viewer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+
+  .viewer.active {
+    display: flex;
+  }
+
+  .viewer img {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  .viewer .caption {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #ddd;
+    font-size: 0.95rem;
+  }
+
+  .viewer .close,
+  .viewer .prev,
+  .viewer .next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 10px;
+    user-select: none;
+  }
+
+  .viewer .close { top: 20px; right: 30px; }
+  .viewer .prev { left: 20px; top: 50%; transform: translateY(-50%); }
+  .viewer .next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+  .viewer .close:hover,
+  .viewer .prev:hover,
+  .viewer .next:hover {
+    color: #e53228;
+  }
