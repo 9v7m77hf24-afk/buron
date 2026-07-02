@@ -1,0 +1,73 @@
+ * { box-sizing: border-box; }
+
+  .page_flore {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(252, 252, 252, 0.95);
+    border-radius: 14px;
+    padding: 40px;
+    text-align: justify;
+  }
+
+  .plant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 30px;
+  }
+
+  .plant-title {
+    color: #e53228;
+    font-size: 1.3rem;
+    margin: 0 0 14px 0;
+    text-align: left;
+  }
+
+  .plant-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  /* --- Vertical side-scroll gallery: one photo at a time --- */
+  .plant-gallery {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    flex: 0 0 260px;
+    width: 260px;
+    height: 320px;
+
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    scrollbar-width: none;
+  }
+
+  .plant-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .plant-photo {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scroll-snap-align: center;
+  }
+
+  .plant-text {
+    flex: 1;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .hint {
+
+    color: #888;
+    font-size: 0.85rem;
+
+    font-style: italic;
+  }

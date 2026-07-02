@@ -1,11 +1,12 @@
 (function () {
   const bottomNav = document.getElementById('bottomNav');
-  let lastY = window.scrollY;
+  const content = document.getElementById('content');
+  let lastY = content.scrollTop;
   let ticking = false;
   const threshold = 8; // ignore tiny jitter
 
   function onScroll() {
-    const currentY = window.scrollY;
+    const currentY = content.scrollTop;
     const delta = currentY - lastY;
 
     if (Math.abs(delta) > threshold) {
@@ -22,7 +23,7 @@
     ticking = false;
   }
 
-  window.addEventListener('scroll', () => {
+  content.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(onScroll);
       ticking = true;

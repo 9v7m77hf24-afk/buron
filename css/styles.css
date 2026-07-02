@@ -1,6 +1,10 @@
 /* ---------- index.html ------------*/
 /* ----------- home.html ------------*/
 
+/* https://whatismyviewport.com for Tablet Redmi SE */
+/* 1097px x 547px */
+/*  686px x 959px */
+
 /* ---------- Reset / base --------- */
 * {
   box-sizing: border-box;
@@ -35,7 +39,7 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,10 +48,7 @@ html, body {
   backdrop-filter: blur(8px);*/
 }
 
-.nav-logo-link {
-  display: flex;
-  align-items: center;
-}
+/*.nav-logo-link { display: flex; align-items: center; */
 
 .nav-logo {
   height: 100px;
@@ -58,9 +59,15 @@ html, body {
 
 /* ---------- Content area ---------- */
 #content {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  min-height: 100%;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   opacity: 1;
   transition: opacity 0.2s ease;
@@ -211,4 +218,21 @@ html, body {
 .menu-item:hover {
   background: rgba(0, 0, 0, 0.75);
   transform: scale(1.05);
+}
+
+/* ---------- PAGES SETUP ---------- */
+.page {
+padding: 50px 70px;
+  text-align: justify;
+  background: rgba(252, 252, 252, 0.8);
+box-sizing: border-box;
+width: 959px;
+margin: 0 auto;
+}
+
+/* Tablet Portrait - Content height */
+@media (orientation: portrait){
+  .page {
+    width: 686px;
+  }
 }
