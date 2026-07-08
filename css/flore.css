@@ -14,9 +14,9 @@
     gap: 28px 20px;
   }
 
-  @media (orientation: portrait) {
+  /*@media (orientation: portrait) {
     .card-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  }*/
 
   .card-title {
     /*color: var(--paper);*/
