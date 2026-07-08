@@ -10,13 +10,12 @@
   /* --- Grid of cards --- */
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 28px 20px;
   }
 
   @media (orientation: portrait) {
     .card-grid { grid-template-columns: repeat(2, 1fr); }
-    .card-label { font-size: 1rem;}
   }
 
   .card-title {
