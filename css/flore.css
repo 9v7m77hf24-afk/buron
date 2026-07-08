@@ -7,22 +7,14 @@
     --accent: #e53228;
   }
 
-  .subhead {
-    text-align: center;
-    color: #b8b8cc;
-    font-size: 0.9rem;
-    margin: 0 0 36px 0;
-    font-style: italic;
-  }
-
   /* --- Grid of cards --- */
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 28px 20px;
   }
 
-  @media (max-width: 620px) {
+  @media (orientation: portrait) {
     .card-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
@@ -76,9 +68,14 @@
     padding: 22px 10px 8px;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
     color: #fff;
-    font-size: 0.75rem;
     text-align: center;
+    font-size: 0.75rem;
   }
+
+.card-label strong,
+.card-label em {
+  display: block;
+}
 
   /* --- Modal (native <dialog>) --- */
   dialog.modal-box {
