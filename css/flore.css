@@ -1,4 +1,4 @@
- * { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
   :root {
     --ink: #1a1a1a;
@@ -7,20 +7,34 @@
     --accent: #e53228;
   }
 
-  /* --- Grid of cards --- */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px 20px;
+ .subhead {
+    text-align: center;
+    color: #b8b8cc;
+    font-size: 0.9rem;
+    margin: 0 0 36px 0;
+    font-style: italic;
   }
 
-  /*@media (orientation: portrait) {
-    .card-grid { grid-template-columns: repeat(2, 1fr); }
-  }*/
+  /* --- Grid of cards --- */
+.card-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.card-grid > div {
+  flex: 0 0 220px;
+  scroll-snap-align: center;
+}
 
   .card-title {
-    /*color: var(--paper);*/
-    color:black;
+    color: var(--paper);
     font-size: 0.95rem;
     font-weight: 600;
     text-align: center;
@@ -68,14 +82,9 @@
     padding: 22px 10px 8px;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
     color: #fff;
-    text-align: center;
     font-size: 0.75rem;
+    text-align: center;
   }
-
-.card-label strong,
-.card-label em {
-  display: block;
-}
 
   /* --- Modal (native <dialog>) --- */
   dialog.modal-box {
@@ -141,10 +150,9 @@
   }
 
   .modal-caption {
-    padding: 14px 20px 20px;
+    padding: 14px 20px 18px;
     line-height: 1.4;
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     color: var(--ink);
     margin: 0;
-    text-align: justify;
   }
