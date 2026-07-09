@@ -242,11 +242,15 @@ margin: 0 auto;
   }
 }
 
+ h2 {
+    margin:25px 0 0 0;
+  }
 
+/*
 .page_flore {
-padding: 25px 50px;
+padding: 30px 50px;
 background: #2b2b45;
-/*background: rgba(252, 252, 252, 0.8); */
+background: rgba(252, 252, 252, 0.8); 
 box-sizing: border-box;
 width: 959px;
 margin: 0 auto;
@@ -255,5 +259,5 @@ margin: 0 auto;
 .page_flore h1 {
 
   font-size: 20px;    
-}
+}*/
 

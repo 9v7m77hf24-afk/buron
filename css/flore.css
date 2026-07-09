@@ -7,12 +7,12 @@
     --accent: #e53228;
   }
 
- .subhead {
-    text-align: center;
-    color: #b8b8cc;
+  .subhead {
+    color:black;
     font-size: 0.9rem;
-    margin: 0 0 36px 0;
+    margin: 0;
     font-style: italic;
+    text-align:justify; 
   }
 
   /* --- Grid of cards --- */
@@ -86,6 +86,16 @@
     text-align: center;
   }
 
+  .card-label strong,
+  .card-label em {
+    display: block;
+  }
+
+  .card-label strong {
+    font-size: 0.85rem;
+    font-weight: 500;  
+  }
+
   /* --- Modal (native <dialog>) --- */
   dialog.modal-box {
     border: none;
@@ -155,4 +165,7 @@
     font-size: 0.92rem;
     color: var(--ink);
     margin: 0;
+    text-align: justify;
   }
+
+ 
