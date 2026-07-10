@@ -118,7 +118,7 @@
     padding: 14px 18px;
     background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -197,6 +197,7 @@
     justify-content: center;
     z-index: 100;
     padding: 20px;
+    flex-direction: column; /*position "alt" subtitle*/
   }
 
   .viewer.active {
@@ -211,13 +212,15 @@
   }
 
   .viewer .caption {
-    position: absolute;
+    /*position: absolute;*/
+    margin-top: 10px;
+    position: static;
     bottom: 30px;
     left: 0;
     right: 0;
     text-align: center;
     color: #ddd;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .viewer .close,
