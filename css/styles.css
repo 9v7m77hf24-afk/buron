@@ -1,4 +1,11 @@
-/* ---------- Reset / base ---------- */
+/* ---------- index.html ------------*/
+/* ----------- home.html ------------*/
+
+/* https://whatismyviewport.com for Tablet Redmi SE */
+/* 1097px x 547px */
+/*  686px x 959px */
+
+/* ---------- Reset / base --------- */
 * {
   box-sizing: border-box;
 }
@@ -18,19 +25,109 @@ html, body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(to bottom, #1e1e2f, #2b2b45);
+  /*background: linear-gradient(to bottom, #1e1e2f, #2b2b45);*/
+  background-image: url("../img/view1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-/* ---------- Nav ---------- */
+/* ---------- Header ---------- */
 .nav {
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
   display: flex;
-  gap: 1.5rem;
-  padding: 1rem 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 0 0;/*1rem 2rem;*/
+ /* background: rgba(30, 30, 47, 0.85);
+  backdrop-filter: blur(8px);*/
 }
 
+/*.nav-logo-link { display: flex; align-items: center; */
+
+.nav-logo {
+  height: 100px;
+  display: block;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+  will-change: transform;
+}
+
+/* ---------- Content area ---------- */
+#content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  opacity: 1;
+  transition: opacity 0.2s ease;
+
+  color:black;
+  padding: 130px 0 4% 0;
+}
+
+#content.fading {
+  opacity: 0;
+}
+
+/* ---------- Bottom nav (scroll-aware) ---------- */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.8rem 0;
+  background: rgba(30, 30, 47, 0.85);
+  backdrop-filter: blur(8px);
+
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+}
+
+.bottom-nav.visible {
+  transform: translateY(0);
+}
+
+.bottom-nav.hidden {
+  display: none;
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  color: #f0f0f5;
+  font-size: 1.4rem;
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 0 0.5rem;
+  transition: opacity 0.15s ease;
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* For text nav_link only 
 .nav-link {
   color: #f0f0f5;
   text-decoration: none;
@@ -38,21 +135,129 @@ html, body {
   opacity: 0.8;
   transition: opacity 0.15s ease;
 }
+*/
+
+.nav-link {
+  display: flex;
+  flex-direction: column; /* or row, depending on layout */
+  align-items: center;
+  gap: 4px;
+}
 
 .nav-link:hover {
   opacity: 1;
 }
 
-/* ---------- Content area ---------- */
-#content {
-  position: relative;
-  z-index: 1;
-  min-height: calc(100vh - 64px);
-  padding: 2rem;
-  opacity: 1;
-  transition: opacity 0.2s ease;
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
-#content.fading {
-  opacity: 0;
+/* ---------- HOME MENU ---------- */
+.page_menu {
+  padding:3% 5%;
+  margin:0 15%;
+  text-align: center;
 }
+
+/* MENU TITLE */
+.page_menu h1 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  /*font-size: clamp(10px, 4vw, 35px);*/
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 1.5);
+}
+
+/* MENU GRID */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 180px);
+  gap:20px;
+  justify-content: center;
+}
+
+/* ICON BUTTON */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 180px;
+  height: 110px;
+
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: white;
+
+  transition: 0.2s ease;
+}
+
+/* ICON */
+.menu-item img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+/* LABEL */
+.menu-item span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* HOVER */
+.menu-item:hover {
+  background: rgba(0, 0, 0, 0.75);
+  transform: scale(1.05);
+}
+
+/* ---------- PAGES SETUP ---------- */
+.page {
+padding: 30px 50px;
+text-align: justify;
+background: rgba(252, 252, 252, 0.8);
+box-sizing: border-box;
+width: 959px;
+margin: 0 auto;
+}
+
+.page h1 { 
+  text-align: center;
+  font-size: 28px;
+}
+
+/* Tablet Portrait - Content height */
+@media (orientation: portrait){
+  .page {
+    width: 686px;
+  }
+}
+
+ h2 {
+    margin:25px 0 0 0;
+  }
+
+/*
+.page_flore {
+padding: 30px 50px;
+background: #2b2b45;
+background: rgba(252, 252, 252, 0.8); 
+box-sizing: border-box;
+width: 959px;
+margin: 0 auto;
+}
+
+.page_flore h1 {
+
+  font-size: 20px;    
+}*/
+

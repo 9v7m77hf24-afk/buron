@@ -1,13 +1,32 @@
-const CACHE_NAME = "guide-du-buron-v4";
+const CACHE_NAME = "guide-du-buron-v2";
 
 const FILES_TO_CACHE = [
   "./index.html",
   "./home.html",
-  "./about.html",
+  "./leburon.html",
+  "./guide-tech.html",
+  "./faune-flore.html",
+  "./gastronomie.html",
+  "./activites.html",
+  "./contact.html",
   "./css/styles.css",
+  "./css/leburon.css",
+  "./css/faune-flore.css",
   "./js/main.js",
   "./js/router.js",
-  "./manifest.json"
+  "./js/footer_nav.js",
+  "./manifest.json",
+  "./img/view1.jpg",
+  "./img/logo.png",
+  "./img/logo-192.png",
+  "./img/logo-512.png",
+  "./img/house.png",
+  "./img/icon1.png",
+  "./img/icon2.png",
+  "./img/icon3.png",
+  "./img/icon4.png",
+  "./img/icon5.png",
+  "./img/icon6.jpg"
 ];
 
 self.addEventListener("install", event => {

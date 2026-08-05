@@ -1,0 +1,59 @@
+/* -------- faune-flore.html -------- */
+/* ----------- flore.html ----------- */
+/* ----------- faune.html ----------- */
+
+
+/* -------- faune-flore.html -------- */
+/* MENU GRID */
+.menu_ff {
+  display: grid;
+  grid-template-columns: repeat(2, 400px);
+  gap:20px;
+  justify-content: center;
+  /*width: fit-content; margin: 0 auto;*/
+  margin-top: 40px;
+  /*align-content: center;*/    /* vertical */
+  /*min-height: 100%;*/          /* needs height to center against */
+}
+
+/* ICON BUTTON */
+.menu-ff-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 400px;
+  height: 350px;
+
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: white;
+
+  transition: 0.2s ease;
+}
+
+/* ICON */
+.menu-ff-item img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+/* LABEL */
+.menu-ff-item span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* HOVER */
+.menu-ff-item:hover {
+  background: rgba(0, 0, 0, 0.75);
+  transform: scale(1.05);
+}
+
+/* ----------- flore.html ----------- */
+
