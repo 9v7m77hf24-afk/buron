@@ -1,4 +1,4 @@
-const CACHE_NAME = "guide-du-buron-v14";
+const CACHE_NAME = "guide-du-buron-v16";
 
 // App shell: the pages, styles, and scripts needed to run the app offline.
 // Keep this list in sync with actual filenames on disk. Even if a name is
@@ -132,7 +132,7 @@ self.addEventListener("fetch", (event) => {
     url.pathname.endsWith("/")
   ) {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: "no-store" })
         .then((response) => {
           if (response.ok) {
             const clone = response.clone();
