@@ -5,6 +5,104 @@
 /* 1097px x 547px */
 /*  686px x 959px */
 
+/* ---------- Self-hosted fonts (offline-first, no CDN) ---------- */
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-500-italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-600-italic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-ui: "Work Sans", system-ui, Roboto, "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Newsreader", serif;
+  /* Portrait width of the reference Redmi tablet (see viewport note above);
+     .page is pinned to this so it stays the same size in both orientations. */
+  --page-width: 686px;
+  --nav-clearance: 130px; /* matches #content's top padding, reserved for the logo */
+  --content-bottom-pad: 4%; /* matches #content's bottom padding */
+}
+
 /* ---------- Reset / base --------- */
 * {
   box-sizing: border-box;
@@ -14,7 +112,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-ui);
   color: #f0f0f5;
 }
 
@@ -44,14 +142,14 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 20px 0 0 0;/*1rem 2rem;*/
- /* background: rgba(30, 30, 47, 0.85);
-  backdrop-filter: blur(8px);*/
+/*background: rgba(30, 30, 47, 0.85);
+backdrop-filter: blur(8px);*/
 }
 
 /*.nav-logo-link { display: flex; align-items: center; */
 
 .nav-logo {
-  height: 100px;
+  height: 120px;
   display: block;
   transition: transform 0.1s linear, opacity 0.1s linear;
   will-change: transform;
@@ -73,14 +171,14 @@ html, body {
   transition: opacity 0.2s ease;
 
   color:black;
-  padding: 130px 0 4% 0;
+  padding: var(--nav-clearance) 0 var(--content-bottom-pad) 0;
 }
 
 #content.fading {
   opacity: 0;
 }
 
-/* ---------- Bottom nav (scroll-aware) ---------- */
+/* ---------- Bottom nav (portrait only, always visible) ---------- */
 .bottom-nav {
   position: fixed;
   left: 0;
@@ -94,46 +192,64 @@ html, body {
   padding: 0.8rem 0;
   background: rgba(30, 30, 47, 0.85);
   backdrop-filter: blur(8px);
-
-  transform: translateY(100%);
-  transition: transform 0.25s ease;
 }
 
-.bottom-nav.visible {
-  transform: translateY(0);
+/* Landscape: no bottom bar — replaced by .home-fab on the left edge */
+@media (orientation: landscape) {
+  .bottom-nav {
+    display: none;
+  }
 }
 
-.bottom-nav.hidden {
+/* Home screen: no navigation chrome in either orientation */
+body[data-page="home"] .bottom-nav,
+body[data-page="home"] .home-fab {
   display: none;
 }
 
-.nav-arrow {
-  background: none;
-  border: none;
-  color: #f0f0f5;
-  font-size: 1.4rem;
-  cursor: pointer;
-  opacity: 0.8;
-  padding: 0 0.5rem;
+/* ---------- Landscape home button ---------- */
+.home-fab {
+  display: none;
+  position: fixed;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(30, 30, 47, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   transition: opacity 0.15s ease;
 }
 
-.nav-arrow:hover {
-  opacity: 1;
+.home-fab:hover {
+  opacity: 0.85;
 }
 
-.nav-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
+.home-fab img {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
-/* For text nav_link only 
+@media (orientation: landscape) {
+  .home-fab {
+    display: flex;
+  }
+}
+
+/* For text nav_link only
 .nav-link {
   color: #f0f0f5;
   text-decoration: none;
   font-weight: 600;
   opacity: 0.8;
   transition: opacity 0.15s ease;
+  font-family: var(--font-ui);
 }
 */
 
@@ -156,21 +272,14 @@ html, body {
 
 /* ---------- HOME MENU ---------- */
 .page_menu {
+  box-sizing: border-box;
+  min-height: 100%;
   padding:3% 5%;
   margin:0 15%;
   text-align: center;
-}
-
-/* MENU TITLE */
-.page_menu h1 {
-  margin-bottom: 30px;
-  font-size: 28px;
-  /*font-size: clamp(10px, 4vw, 35px);*/
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: white;
-  text-shadow:
-    0 2px 8px rgba(0, 0, 0, 1.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 /* MENU GRID */
@@ -210,8 +319,9 @@ html, body {
 /* LABEL */
 .menu-item span {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
+  font-family: var(--font-ui);
 }
 
 /* HOVER */
@@ -222,42 +332,103 @@ html, body {
 
 /* ---------- PAGES SETUP ---------- */
 .page {
+padding: clamp(16px, 4vw, 40px) clamp(16px, 5vw, 50px);
+text-align: justify;
+/* Dark glass + blur: readable over sky/grass/mountain photos alike */
+background: rgba(20, 24, 20, 0.62);
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+color: #F4EFE4;
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 4px;
+box-sizing: border-box;
+/* Fixed width in both orientations: fills the screen edge-to-edge in
+   portrait (viewport = --page-width) and leaves side margins revealing
+   the background image in landscape (viewport > --page-width). */
+max-width: var(--page-width);
+width: 100%;
+margin: calc(-1 * var(--nav-clearance)) auto calc(-1 * var(--content-bottom-pad)) auto;
+/* Starts at the very top of the screen (over the logo) and spans at
+   least one full screen height, with no background band top or bottom. */
+min-height: 100vh;
+min-height: 100dvh;
+}
+
+.page h1 {
+  text-align: center;
+  font-size: clamp(20px, 4vw, 28px);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+.page p {
+  font-size: 15px;
+  font-family: var(--font-ui);
+}
+
+.page .subtitle {
+  text-align:center; font-size:12px; color:#c9c4b6; margin:0 0 22px 0;
+}
+
+ h2 {
+    margin:25px 0 10px 0;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+  }
+
+
+
+
+
+
+  /* GASTRO */
+  .page_gastro {
 padding: 30px 50px;
 text-align: justify;
-background: rgba(252, 252, 252, 0.8);
 box-sizing: border-box;
 width: 959px;
 margin: 0 auto;
+color:white; 
+/*background: rgba(0, 0, 0, 0.55);*/
+
 }
 
-.page h1 { 
-  text-align: center;
+.page_gastro h1 {
+  margin-bottom: 30px;
   font-size: 28px;
+  /*font-size: clamp(10px, 4vw, 35px);*/
+
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: 0.02em;
+  color: white;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 1.5);
+  text-align: center;
 }
 
 /* Tablet Portrait - Content height */
 @media (orientation: portrait){
-  .page {
+  .page_gastro {
     width: 686px;
   }
 }
 
- h2 {
-    margin:25px 0 0 0;
+/* Tablet Portrait - lift home menu toward the middle of the grass in
+   view1.jpg. background-size:cover on this landscape photo, shown on a
+   much taller portrait viewport, ends up scaled/cropped by HEIGHT (sides
+   get cropped, not top/bottom) — so the full vertical extent of the photo
+   maps 1:1 onto the screen's height, and the ~80%-down "middle of the
+   green" landmark lines up with ~80% of the viewport height too.
+   .page_menu uses align-items:flex-end, so extra bottom padding here
+   pushes the menu up without changing how it's centered horizontally. */
+@media (orientation: portrait) {
+  .page_menu {
+    padding-bottom: 20%;
   }
-
-/*
-.page_flore {
-padding: 30px 50px;
-background: #2b2b45;
-background: rgba(252, 252, 252, 0.8); 
-box-sizing: border-box;
-width: 959px;
-margin: 0 auto;
 }
-
-.page_flore h1 {
-
-  font-size: 20px;    
-}*/
 

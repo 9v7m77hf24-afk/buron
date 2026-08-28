@@ -1,0 +1,390 @@
+/* -------- guide.html -------- */
+
+/* ---------- Shared flat divided list (Wifi / Music / toggles) ----------
+   Matches the reference layout: icon, bold label, inline detail text,
+   thin divider under each row, no per-row card box. */
+
+.info-list {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.info-row,
+.toggle-test summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: #F4EFE4;
+}
+
+/* Base: size + color only. No mask-image here — every entry adds its own
+   modifier class below to pick the icon shape. This is deliberate: it
+   means forgetting a modifier renders a solid colored square rather than
+   silently reusing whatever icon happened to be last in the cascade. */
+.row-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  display: block;
+  background-color: var(--accent, #e53228);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* One modifier per icon — same size/color inherited from .row-icon above,
+   only the shape changes. Add a new one of these + a new .svg file any
+   time a new entry needs its own icon. */
+.row-icon--wifi {
+  -webkit-mask-image: url("../img/wifi.svg");
+  mask-image: url("../img/wifi.svg");
+}
+
+.row-icon--music {
+  -webkit-mask-image: url("../img/music.svg");
+  mask-image: url("../img/music.svg");
+}
+
+.row-icon--eau {
+  -webkit-mask-image: url("../img/eau.svg");
+  mask-image: url("../img/eau.svg");
+}
+
+.row-icon--gaz {
+  -webkit-mask-image: url("../img/gaz.svg");
+  mask-image: url("../img/gaz.svg");
+}
+
+.row-icon--electricite {
+  -webkit-mask-image: url("../img/electricite.svg");
+  mask-image: url("../img/electricite.svg");
+}
+
+.row-icon--prise {
+  -webkit-mask-image: url("../img/prise.svg");
+  mask-image: url("../img/prise.svg");
+}
+
+.row-icon--interrupteur {
+  -webkit-mask-image: url("../img/interrupteur.svg");
+  mask-image: url("../img/interrupteur.svg");
+}
+
+
+.row-icon--securite {
+  -webkit-mask-image: url("../img/flame.svg");
+  mask-image: url("../img/flame.svg");
+}
+
+.row-icon--secours {
+  -webkit-mask-image: url("../img/secours.svg");
+  mask-image: url("../img/secours.svg");
+}
+
+.row-icon--plancha {
+  -webkit-mask-image: url("../img/plancha.svg");
+  mask-image: url("../img/plancha.svg");
+}
+
+
+
+
+
+
+/* Fallback for browsers/WebViews with no mask-image support at all
+   (rather than a per-entry issue): degrade from an invisible icon to a
+   deliberate-looking colored square instead of a broken blank gap. */
+@supports not ((mask-image: url("")) or (-webkit-mask-image: url(""))) {
+  .row-icon {
+    border-radius: 4px;
+  }
+}
+
+.row-label {
+  font-weight: 700;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.row-detail {
+  color: rgba(244, 239, 228, 0.8);
+  flex: 1 1 auto;
+  font-size:13.5px;
+}
+
+.row-detail strong {
+  color: #F4EFE4;
+  font-weight: 700;
+}
+
+/* ---------- Toggle rows: same row look, plus disclosure behavior ---------- */
+
+.toggle-test {
+  /* undo the old boxed-card look so it joins the flat list above */
+  border: none;
+  border-radius: 0;
+  background: none;
+  margin: 0;
+}
+
+.toggle-test + .toggle-test {
+  margin: 0;
+}
+
+.toggle-test summary {
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.15s ease;
+}
+
+.toggle-test summary:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.toggle-test summary::-webkit-details-marker {
+  display: none;
+}
+
+.toggle-test summary .row-label {
+  flex: 1 1 auto; /* fills the row like .row-detail does on static rows */
+  white-space: normal;
+  font-weight: 600;
+}
+
+/* Toggle color of opening/closing +- */
+.toggle-test summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  font-size: 1.1rem;
+  line-height: 1;
+  color:#c9c4b6;
+  /*color: var(--accent, #e53228);*/
+  transition: transform 0.2s ease;
+}
+
+.toggle-test[open] summary::after {
+  content: "\2212"; /* minus sign */
+}
+
+.toggle-body {
+  padding: 4px 4px 16px 34px; /* 34px ≈ icon width + gap, aligns under the label text */
+}
+
+.toggle-body p {
+  margin: 12px 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #F4EFE4;
+  text-align: justify;
+}
+
+/* "Voir sur le plan" link inside a toggle body — jumps to the floor plan
+   section, switches to the right floor tab, and highlights the matching
+   dot (see bindPlanLinks in router.js). */
+.plan-link {
+  /* Align center 
+  display: block;
+  width: fit-content;
+  margin: 12px auto 0;*/
+
+  /* Align left */
+  display: inline-block;
+  margin-top: 12px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.plan-link:hover {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Floor plan section ---------- */
+
+.fp-section {
+  margin-top: 32px;
+}
+
+.fp-section h2 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: #F4EFE4;
+  margin: 0 0 12px 0;
+}
+
+.floor-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.floor-tab {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #c9c4b6;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.floor-tab.active {
+  background: var(--accent, #e53228);
+  border-color: var(--accent, #e53228);
+  color: #fff;
+}
+
+.floor-plane {
+  display: none;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.floor-plane.active {
+  display: block;
+}
+
+/* Positioning context for dots — img stays exactly as before, this div
+   just wraps it so .plan-dot's percentage-based left/top resolve against
+   the image's own box rather than the whole page. */
+.plan-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.plan-wrap img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.plan-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--accent, #e53228);
+  border: 2px solid #fff;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(229, 50, 40, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.plan-dot:hover,
+.plan-dot:focus-visible {
+  box-shadow: 0 0 0 6px rgba(229, 50, 40, 0.35);
+}
+
+.plan-dot.tip-visible {
+  box-shadow: 0 0 0 6px rgba(229, 50, 40, 0.35);
+  z-index: 10; /* guarantees the open tooltip renders above any neighboring dot it might overlap */
+}
+
+.plan-dot.pulse {
+  animation: planDotPulse 1.1s ease-out 2;
+}
+
+/* Optional icon inside a dot — opt-in per dot (base + modifier span in the
+   HTML), same pattern as .row-icon / .row-icon--x above. Dots with no icon
+   span stay a plain circle exactly as before. */
+.plan-dot-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  pointer-events: none; /* clicks still go to the button underneath */
+}
+
+.plan-dot-icon--eau {
+  -webkit-mask-image: url("../img/eau.svg");
+  mask-image: url("../img/eau.svg");
+}
+
+.plan-dot-icon--gaz {
+  -webkit-mask-image: url("../img/gaz.svg");
+  mask-image: url("../img/gaz.svg");
+}
+
+.plan-dot-icon--flame {
+  -webkit-mask-image: url("../img/flame.svg");
+  mask-image: url("../img/flame.svg");
+}
+
+@keyframes planDotPulse {
+  0%   { box-shadow: 0 0 0 4px rgba(229, 50, 40, 0.5); }
+  50%  { box-shadow: 0 0 0 14px rgba(229, 50, 40, 0.05); }
+  100% { box-shadow: 0 0 0 4px rgba(229, 50, 40, 0.25); }
+}
+
+/* Tooltip anchored to the dot itself, not a fixed spot on the page — since
+   .plan-dot is already position:absolute, this positions relative to the
+   dot's own small box, so it always sits right next to it no matter where
+   the dot is on the plan. Hidden by default; .tip-visible (toggled in
+   router.js) shows it. */
+.dot-tip {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -8px);
+  background: rgba(20, 24, 20, 0.95);
+  color: #F4EFE4;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+  pointer-events: none; /* purely informational — clicks pass through to the dot underneath */
+  opacity: 0;
+  visibility: hidden;
+  z-index: 5;
+}
+
+/* small triangle pointing down at the dot */
+.dot-tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(20, 24, 20, 0.95);
+}
+
+.plan-dot.tip-visible .dot-tip {
+  opacity: 1;
+  visibility: visible;
+}

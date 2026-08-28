@@ -8,14 +8,20 @@
   }
 
   .subhead {
-    color:black;
+    color: inherit;
+    opacity: 0.85;
     font-size: 0.9rem;
     margin: 0;
     font-style: italic;
-    text-align:justify; 
+    text-align:justify;
+    font-family: var(--font-ui);
   }
 
   /* --- Grid of cards --- */
+.gallery {
+  position: relative;
+}
+
 .card-grid {
   display: flex;
   gap: 20px;
@@ -25,11 +31,49 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* Click-to-scroll nav buttons, standard-gallery style: red circular arrows
+   overlaid on the left/right edges of the horizontal strip. */
+.grid-prev,
+.grid-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  z-index: 3;
+  opacity: 0.9;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.grid-prev { left: 6px; }
+.grid-next { right: 6px; }
+
+.grid-prev:hover,
+.grid-next:hover {
+  opacity: 1;
+}
+
+.grid-prev:active,
+.grid-next:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
 .card-grid::-webkit-scrollbar {
   height: 8px;
 }
 .card-grid > div {
-  flex: 0 0 220px;
+  flex: 0 0 210px;
   scroll-snap-align: center;
 }
 
@@ -39,6 +83,7 @@
     font-weight: 600;
     text-align: center;
     margin: 0 0 10px 0;
+    font-family: var(--font-ui);
   }
 
   .card {
@@ -82,7 +127,7 @@
     padding: 22px 10px 8px;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
     color: #fff;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     text-align: center;
   }
 
@@ -93,22 +138,50 @@
 
   .card-label strong {
     font-size: 0.85rem;
-    font-weight: 500;  
+    font-weight: 600;
+    font-family: var(--font-ui);
   }
 
-  /* --- Modal (native <dialog>) --- */
+  .card-label em {
+    font-family: var(--font-ui);
+    font-style: italic;
+  }
+
+  /* --- Modal (native <dialog>) ---
+     Full-screen takeover, same idea as leburon.html's fullscreen .viewer:
+     fills the viewport, shows the whole photo via object-fit:contain
+     (never cropped), dark theme throughout. */
   dialog.modal-box {
+    display: none;
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
     border: none;
-    border-radius: 14px;
+    border-radius: 0;
     padding: 0;
-    max-width: 420px;
-    width: 90vw;
-    background: var(--paper);
+
+    /* Gallery background transparency*/
+    background: rgba(0,0,0,0.5);  
+    
+    flex-direction: column;
     overflow: hidden;
+  }
+
+  dialog.modal-box[open] {
+    display: flex;
   }
 
   dialog.modal-box::backdrop {
     background: rgba(10, 10, 20, 0.88);
+  }
+
+  /* keeps the absolutely-positioned close button from taking up space as a flex item */
+  dialog.modal-box > form {
+    display: contents;
   }
 
   .modal-close {
@@ -119,53 +192,71 @@
     height: 34px;
     border-radius: 50%;
     border: none;
-    background: rgba(0,0,0,0.06);
-    color: var(--ink);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
     font-size: 1.1rem;
     line-height: 1;
     cursor: pointer;
+    z-index: 5;
   }
 
-  .modal-close:hover { background: rgba(0,0,0,0.12); }
+  .modal-close:hover { background: var(--accent); }
 
-  .modal-title {
-    padding: 16px 50px 10px 20px;
-    font-size: 1.1rem;
-    color: var(--accent);
+  /* the carousel/dots inside a species dialog reuse leburon.html's
+     .carousel/.dots components, stretched to fill the full-screen dialog
+     and switched to object-fit:contain so the whole photo stays visible */
+  .modal-box .carousel {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: none;
     margin: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
-  .modal-gallery {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .modal-gallery::-webkit-scrollbar { display: none; }
-
-  .modal-slide {
-    flex: 0 0 100%;
-    width: 100%;
-    height: 460px;
-    scroll-snap-align: center;
-  }
-
-  .modal-slide img {
-    width: 100%;
+  .modal-box .carousel-track {
+    aspect-ratio: auto;
     height: 100%;
-    object-fit: cover;
-    display: block;
   }
 
+  /* the img is sized to its own intrinsic aspect ratio (not stretched to
+     fill the slide) and centered here, so border-radius below clips the
+     actual visible photo edges instead of the corners of an invisible,
+     letterboxed 100%-width/height box */
+  .modal-box .slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-box .slide img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 5%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+
+  .modal-box .dots {
+    flex: 0 0 auto;
+    margin: 10px 0;
+  }
+
+  /* same look as .caption-bar (dark bar, white text) but as its own block
+     under the picture instead of overlaid on top of it */
   .modal-caption {
-    padding: 14px 20px 18px;
+    flex: 0 0 auto;
+    padding: 0 20px 14px;
+    max-width: 700px;
     line-height: 1.4;
-    font-size: 0.92rem;
-    color: var(--ink);
-    margin: 0;
+    font-size: 0.9rem;
+    color: #fff;
+    background: rgba(0,0,0,0.65);
+    margin: 0 auto;
     text-align: justify;
+    font-family: var(--font-ui);
   }
-
- 
