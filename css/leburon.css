@@ -141,10 +141,16 @@
     height: 30px;
     cursor: pointer;
     font-size: 0.9rem;
+    transition: background 0.15s ease, transform 0.1s ease;
   }
 
   .expand-btn:hover {
     background: #e53228;
+  }
+
+  .expand-btn:active {
+    background: #b8281f;
+    transform: scale(0.9);
   }
 
   /* --- CAROUSEL ARROWS --- */
@@ -162,11 +168,18 @@
     color: #1a1a1a;
     cursor: pointer;
     z-index: 5;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
   }
 
   .car-btn:hover {
     background: #e53228;
     color: #fff;
+  }
+
+  .car-btn:active {
+    background: #b8281f;
+    color: #fff;
+    transform: translateY(-50%) scale(0.88);
   }
 
   .car-btn.prev { left: 10px; }
@@ -188,7 +201,11 @@
     cursor: pointer;
     border: none;
     padding: 0;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .dot:active {
+    transform: scale(1.4);
   }
 
   .dot.active {
@@ -253,6 +270,7 @@
     line-height: 1;
     padding: 10px;
     user-select: none;
+    transition: color 0.15s ease, transform 0.1s ease;
   }
 
   .viewer .close { top: 20px; right: 30px; }
@@ -263,4 +281,15 @@
   .viewer .prev:hover,
   .viewer .next:hover {
     color: #e53228;
+  }
+
+  .viewer .close:active {
+    color: #e53228;
+    transform: scale(0.85);
+  }
+
+  .viewer .prev:active,
+  .viewer .next:active {
+    color: #e53228;
+    transform: translateY(-50%) scale(0.85);
   }

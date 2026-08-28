@@ -113,6 +113,11 @@
     box-shadow: 0 8px 22px rgba(0,0,0,0.45);
   }
 
+  .card:active .card-frame {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+
   .card:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 4px;
@@ -198,9 +203,15 @@
     line-height: 1;
     cursor: pointer;
     z-index: 5;
+    transition: background 0.15s ease, transform 0.1s ease;
   }
 
   .modal-close:hover { background: var(--accent); }
+
+  .modal-close:active {
+    background: var(--accent);
+    transform: scale(0.88);
+  }
 
   /* the carousel/dots inside a species dialog reuse leburon.html's
      .carousel/.dots components, stretched to fill the full-screen dialog

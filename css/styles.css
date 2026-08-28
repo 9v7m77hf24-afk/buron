@@ -101,11 +101,17 @@
   --page-width: 686px;
   --nav-clearance: 130px; /* matches #content's top padding, reserved for the logo */
   --content-bottom-pad: 4%; /* matches #content's bottom padding */
+  --bottom-nav-height: 64px; /* .bottom-nav's rendered height (~48px) + breathing room */
 }
 
 /* ---------- Reset / base --------- */
 * {
   box-sizing: border-box;
+  /* Kills the default Android/Chrome blue-gray flash shown on any
+     tappable element while pressed (buttons, links, .menu-item, etc.).
+     Desktop never shows this — it's a touch-only browser default, which
+     is why the laptop looked fine and the tablet didn't. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -230,6 +236,11 @@ body[data-page="home"] .home-fab {
   opacity: 0.85;
 }
 
+.home-fab:active {
+  opacity: 0.7;
+  transform: translateY(-50%) scale(0.92);
+}
+
 .home-fab img {
   width: 24px;
   height: 24px;
@@ -258,10 +269,16 @@ body[data-page="home"] .home-fab {
   flex-direction: column; /* or row, depending on layout */
   align-items: center;
   gap: 4px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .nav-link:hover {
   opacity: 1;
+}
+
+.nav-link:active {
+  opacity: 0.6;
+  transform: scale(0.9);
 }
 
 .nav-icon {
@@ -330,6 +347,13 @@ body[data-page="home"] .home-fab {
   transform: scale(1.05);
 }
 
+/* PRESSED — a touch-friendly press-down, separate from the hover lift
+   above so tapping doesn't feel like it's fighting the hover scale-up */
+.menu-item:active {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(0.96);
+}
+
 /* ---------- PAGES SETUP ---------- */
 .page {
 padding: clamp(16px, 4vw, 40px) clamp(16px, 5vw, 50px);
@@ -352,6 +376,17 @@ margin: calc(-1 * var(--nav-clearance)) auto calc(-1 * var(--content-bottom-pad)
    least one full screen height, with no background band top or bottom. */
 min-height: 100vh;
 min-height: 100dvh;
+}
+
+/* Bottom nav is fixed and portrait-only (see .bottom-nav above) — without
+   this, a page's last bit of content (timeline, gallery, floor plan...)
+   can render underneath it in portrait. Applied here on .page itself,
+   shared by every page, rather than repeated per-page in guide.css /
+   leburon.css / flore.css for each page's differently-named last element. */
+@media (orientation: portrait) {
+  .page {
+    padding-bottom: calc(clamp(16px, 4vw, 40px) + var(--bottom-nav-height, 64px) + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 .page h1 {
@@ -428,7 +463,7 @@ color:white;
    pushes the menu up without changing how it's centered horizontally. */
 @media (orientation: portrait) {
   .page_menu {
-    padding-bottom: 20%;
+    padding-bottom: 15%;
   }
 }
 

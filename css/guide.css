@@ -148,6 +148,10 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+.toggle-test summary:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .toggle-test summary::-webkit-details-marker {
   display: none;
 }
@@ -208,11 +212,16 @@
   padding: 7px 14px;
   border-radius: 20px;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
 .plan-link:hover {
   background: rgba(0, 0, 0, 0.55);
+}
+
+.plan-link:active {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(0.96);
 }
 
 /* ---------- Floor plan section ---------- */
@@ -246,7 +255,11 @@
   padding: 8px 4px;
   border-radius: 20px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.floor-tab:active {
+  transform: scale(0.96);
 }
 
 .floor-tab.active {
@@ -297,6 +310,11 @@
 .plan-dot:hover,
 .plan-dot:focus-visible {
   box-shadow: 0 0 0 6px rgba(229, 50, 40, 0.35);
+}
+
+.plan-dot:active {
+  transform: translate(-50%, -50%) scale(0.85);
+  box-shadow: 0 0 0 6px rgba(229, 50, 40, 0.4);
 }
 
 .plan-dot.tip-visible {
