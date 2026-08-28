@@ -215,7 +215,7 @@ history.replaceState({ page: initialPage }, '', `#${initialPage}`);
 // then UI) is what makes the launch read as deliberate rather than an
 // abrupt pop-in.
 const MIN_SPLASH_MS = 600;
-const BG_SETTLE_MS = 700; // how long the background shows alone before the menu fades in
+const BG_SETTLE_MS = 1000; // 700 before, how long the background shows alone before the menu fades in
 const splashStart = performance.now();
 
 Promise.all([
