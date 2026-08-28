@@ -134,7 +134,7 @@ function bindPlanLinks() {
 // own keydown handler).
 document.addEventListener('click', closeAllPlanTips);
 
-async function loadPage(page, push = true) {
+async function loadPage(page, push = true, { reveal = true } = {}) {
   content.classList.add('fading');
 
   let html;
@@ -152,11 +152,14 @@ async function loadPage(page, push = true) {
 
   // Wrapped in a promise so callers (notably the initial startup splash
   // handling below) can await "content is actually in the DOM" instead of
-  // guessing with their own timer.
+  // guessing with their own timer. `reveal: false` leaves #content hidden
+  // (still in .fading) even once the DOM is populated — used only for the
+  // very first load, so the app can show the background alone for a beat
+  // before deliberately revealing the menu (see revealContent() below).
   return new Promise((resolve) => {
     setTimeout(() => {
       content.innerHTML = html;
-      content.classList.remove('fading');
+      if (reveal) content.classList.remove('fading');
       document.body.dataset.page = page;
       bindPageLinks();  // re-bind, since #content's links are new DOM nodes
       bindToggles();    // re-bind for whichever page just loaded; safe no-op on pages with no .toggle-test markup
@@ -170,6 +173,13 @@ async function loadPage(page, push = true) {
       resolve();
     }, FADE_MS);
   });
+}
+
+// Reveals #content when it was loaded with { reveal: false }. Reuses the
+// same .fading/opacity transition already defined in styles.css, so this
+// fade-in looks identical to a normal page transition.
+function revealContent() {
+  content.classList.remove('fading');
 }
 
 // Handle nav clicks
@@ -197,19 +207,27 @@ history.replaceState({ page: initialPage }, '', `#${initialPage}`);
 // Startup splash: index.html shows a full-screen #app-splash overlay (same
 // background/logo as the native OS splash) so this handoff reads as one
 // continuous launch instead of native-splash -> blank/unstyled flash ->
-// menu popping in. It's only removed once the home page is genuinely
-// ready — real content in the DOM (loadPage's promise), fonts loaded (no
-// FOUT), and a minimum display time so it never flickers on a fast load.
+// menu popping in. The home page loads hidden (reveal:false) so it's
+// ready in the DOM but not shown yet — once fonts are loaded and a
+// minimum splash time has passed, the splash fades out revealing the
+// background alone, and only after a further short pause does the menu
+// itself fade in on top. That staged reveal (background settles first,
+// then UI) is what makes the launch read as deliberate rather than an
+// abrupt pop-in.
 const MIN_SPLASH_MS = 600;
+const BG_SETTLE_MS = 700; // how long the background shows alone before the menu fades in
 const splashStart = performance.now();
 
 Promise.all([
-  loadPage(initialPage, false),
+  loadPage(initialPage, false, { reveal: false }),
   (document.fonts && document.fonts.ready) || Promise.resolve()
 ]).then(() => {
   const elapsed = performance.now() - splashStart;
   const remaining = Math.max(0, MIN_SPLASH_MS - elapsed);
-  setTimeout(hideSplash, remaining);
+  setTimeout(() => {
+    hideSplash();
+    setTimeout(revealContent, BG_SETTLE_MS);
+  }, remaining);
 });
 
 function hideSplash() {
