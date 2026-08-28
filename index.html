@@ -10,8 +10,9 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/leburon.css">
-  <link rel="stylesheet" href="./css/faune-flore.css">
   <link rel="stylesheet" href="./css/flore.css">
+  <link rel="stylesheet" href="./css/gastro.css">
+  <link rel="stylesheet" href="./css/guide.css">
   <link rel="icon" href="./img/logo.png" type="image/png"/>
 
 </head>
@@ -29,25 +30,24 @@
       <!-- Page content gets injected here by router.js -->
   </main>
 
+  <!-- Landscape-only home button; hidden entirely on the home screen -->
+  <a href="#" data-page="home" class="home-fab" aria-label="Retour à l'accueil">
+    <img src="./img/house.png" alt="" class="nav-icon">
+  </a>
+
   <footer class="bottom-nav" id="bottomNav">
-    <!-- Arrows &#9664/&#9654 -->
-    <button class="nav-arrow" id="navBack" aria-label="Go back">&#10094;</button>
-    
     <a href="#" data-page="home" class="nav-link">
-      <img src="./img/house_br.png" alt="" class="nav-icon">
+      <img src="./img/house.png" alt="" class="nav-icon">
       <!--<span>Accueil</span>-->
     </a>
     <!--
     <a href="#" data-page="about" class="nav-link">Infos</a>
     -->
-    
-    <button class="nav-arrow" id="navForward" aria-label="Go forward">&#10095;</button>
   </footer>
 
   <!-- Order matters -->
-  <script src="./js/gallery_carousel.js"></script>
-  <script src="./js/router.js"></script>  
-  <script src="./js/footer_nav.js"></script>  
+  <script src="./js/gallery-engine.js"></script>
+  <script src="./js/router.js"></script>
   <script src="./js/main.js"></script>
 </body>
 </html>

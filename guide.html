@@ -1,0 +1,156 @@
+<div class="page">
+    <h1>Guide Technique</h1>
+    <p class="subtitle">Wifi &middot; Bluetooth &middot; Eau &middot; Gaz &middot; Électricité &middot; Securité &middot; Plancha </p>
+
+    <div class="info-list">
+
+        <div class="info-row">
+            <span class="row-icon row-icon--wifi" aria-hidden="true"></span>
+            <span class="row-label">Wifi</span>
+            <span class="row-detail">Guest &middot; Paradis1427</span>
+        </div>
+
+        <div class="info-row">
+            <span class="row-icon row-icon--music" aria-hidden="true"></span>
+            <span class="row-label">Music</span>
+            <span class="row-detail">Bluetooth &middot; JBL Buron du Tournel</span>
+        </div>
+
+        <!-- EAU toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--eau" aria-hidden="true"></span>
+                <span class="row-label">Eau</span>
+            </summary>
+            <div class="toggle-body">
+                <p>
+                Robinet d'arret general dans le local technique, sous la première étagère.
+                </p>
+                <button class="plan-link" data-floor="rdc" data-point="eau">Voir sur le plan</button>
+            </div>
+        </details>
+
+        <!-- GAZ toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--gaz" aria-hidden="true"></span>
+                <span class="row-label">Gaz</span>
+            </summary>
+            <div class="toggle-body">
+                <p>
+                   Robinet d'arret general dehors, derriére le local technique.
+                </p>
+                <button class="plan-link" data-floor="rdc" data-point="gaz">Voir sur le plan</button>
+            </div>
+        </details>
+
+        <!-- Électricité toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--electricite" aria-hidden="true"></span>
+                <span class="row-label">Électricité</span>
+            </summary>
+            <div class="toggle-body">
+                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Un second bl.</p>
+            </div>
+        </details>
+
+        <!-- Prises toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--prise" aria-hidden="true"></span>
+                <span class="row-label">Prises</span>
+            </summary>
+            <div class="toggle-body">
+                <p>
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Un second bloc, pour vérifier que plusieurs toggles peuvent coexister sur la même page sans se gêner.
+                </p>
+            </div>
+        </details>
+
+        <!-- Interrupteurs toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--interrupteur" aria-hidden="true"></span>
+                <span class="row-label">Interrupteurs</span>
+            </summary>
+            <div class="toggle-body">
+                <p>Toutes les lumiéres sont en temporizateur, sauf celles des escaliers et de la hote, qui faut eteindre manuelment.</p>
+            </div>
+        </details>
+
+        <!-- Securite incendie toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--securite" aria-hidden="true"></span>
+                <span class="row-label">Securité incendie</span>
+            </summary>
+            <div class="toggle-body">
+                <p>Il y a 2 extincteurs au Buron: un a l'interior et un a l'exterieur.</p>
+                <button class="plan-link" data-floor="rdc" data-point="extincteur">Voir sur le plan</button>
+            </div>
+        </details>
+    
+        <!-- Trousses de secours toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--secours" aria-hidden="true"></span>
+                <span class="row-label">Trousses de secours</span>
+            </summary>
+            <div class="toggle-body">
+                <p>
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Un second bloc, pour vérifier que plusieurs toggles peuvent coexister sur la même page sans se gêner.
+                </p>
+            </div>
+        </details>
+
+        <!-- Plancha toggle -->
+        <details class="toggle-test">
+            <summary>
+                <span class="row-icon row-icon--plancha" aria-hidden="true"></span>
+                <span class="row-label">Plancha</span>
+            </summary>
+            <div class="toggle-body">
+                <p>Instructions de nettoyage de la plancha à l'extérieur.</p>
+            </div>
+        </details>
+
+    </div>
+    
+    <!-- House Plan -->
+    <!-- Use doc/guide-tech/dot-picker.html to calculate the position of the dot automatically -->
+    <div class="fp-section">
+        <h2>Plan de la maison</h2>
+        <div class="floor-tabs">
+            <button class="floor-tab active" data-floor="rdc">Rez-de-chaussée</button>
+            <button class="floor-tab" data-floor="etage">Étage</button>
+        </div>
+        <div class="floor-plane active" data-floor="rdc">
+            <div class="plan-wrap">
+                <img src="./img/plan-rdc.png" alt="Plan du rez-de-chaussée">
+                <!-- EAU dot -->
+                <button class="plan-dot" data-point="eau" style="left: 6%; top: 73.3%;" data-label="Robinet d'arret d'eau general">
+                    <span class="plan-dot-icon plan-dot-icon--eau" aria-hidden="true"></span>
+                </button>
+
+                <!-- GAZ dot -->
+                <button class="plan-dot" data-point="gaz" style="left: 18.0%; top: 68%;" data-label="Robinet de fermeture du gaz">
+                    <span class="plan-dot-icon plan-dot-icon--gaz" aria-hidden="true"></span>
+                </button>
+                
+                <!-- Extincteur dot -->
+                <button class="plan-dot" data-point="extincteur" style="left: 70.7%; top: 95.5%;" data-label="Extincteur">
+                    <span class="plan-dot-icon plan-dot-icon--flame" aria-hidden="true"></span>
+                </button>
+                <button class="plan-dot" data-point="extincteur" style="left: 20%; top: 63%;" data-label="Extincteur">
+                    <span class="plan-dot-icon plan-dot-icon--flame" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="floor-plane" data-floor="etage">
+            <div class="plan-wrap">
+                <img src="./img/plan-etage.png" alt="Plan du 1er étage">
+            </div>
+        </div>
+    </div>
+</div>
