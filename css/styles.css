@@ -141,7 +141,13 @@ html, body {
 /* Sits above everything (.nav is z-index:0, #content is z-index:1) until
    router.js removes it once the home page is genuinely ready. Colors
    match manifest.json's background_color / the native OS splash, so the
-   two hand off without a visible seam. */
+   two hand off without a visible seam.
+
+   The logo and the white background fade on their own separate timelines
+   (see router.js's hideSplash): the logo fades out alone first, and only
+   once that finishes does the white background itself start fading away
+   to reveal the app underneath — a deliberate two-step exit rather than
+   both disappearing together. */
 #app-splash {
   position: fixed;
   inset: 0;
@@ -150,7 +156,7 @@ html, body {
   align-items: center;
   justify-content: center;
   background: #F4EFE4;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.9s ease;
 }
 
 #app-splash.splash-hidden {
@@ -162,6 +168,11 @@ html, body {
   width: 45vw;
   max-width: 260px;
   display: block;
+  transition: opacity 0.7s ease;
+}
+
+.splash-logo.logo-hidden {
+  opacity: 0;
 }
 
 /* ---------- Header ---------- */
@@ -209,6 +220,14 @@ backdrop-filter: blur(8px);*/
 
 #content.fading {
   opacity: 0;
+}
+
+/* Slower fade used only for the very first reveal of the home menu on
+   startup (see router.js's revealContent()) — normal page-to-page
+   navigation keeps the quicker 0.2s transition above so menu taps still
+   feel snappy. Removed again once the fade completes. */
+#content.initial-reveal {
+  transition: opacity 0.6s ease;
 }
 
 /* ---------- Bottom nav (portrait only, always visible) ---------- */
