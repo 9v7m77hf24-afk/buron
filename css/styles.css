@@ -137,6 +137,33 @@ html, body {
   background-attachment: fixed;
 }
 
+/* ---------- Startup splash overlay ---------- */
+/* Sits above everything (.nav is z-index:0, #content is z-index:1) until
+   router.js removes it once the home page is genuinely ready. Colors
+   match manifest.json's background_color / the native OS splash, so the
+   two hand off without a visible seam. */
+#app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F4EFE4;
+  transition: opacity 0.4s ease;
+}
+
+#app-splash.splash-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-logo {
+  width: 45vw;
+  max-width: 260px;
+  display: block;
+}
+
 /* ---------- Header ---------- */
 .nav {
   position: fixed;
