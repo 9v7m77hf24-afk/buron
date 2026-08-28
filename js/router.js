@@ -179,7 +179,11 @@ async function loadPage(page, push = true, { reveal = true } = {}) {
 // same .fading/opacity transition already defined in styles.css, so this
 // fade-in looks identical to a normal page transition.
 function revealContent() {
+  content.classList.add('initial-reveal');
   content.classList.remove('fading');
+  content.addEventListener('transitionend', () => {
+    content.classList.remove('initial-reveal'); // back to normal-speed nav transitions
+  }, { once: true });
 }
 
 // Handle nav clicks
@@ -215,7 +219,7 @@ history.replaceState({ page: initialPage }, '', `#${initialPage}`);
 // then UI) is what makes the launch read as deliberate rather than an
 // abrupt pop-in.
 const MIN_SPLASH_MS = 600;
-const BG_SETTLE_MS = 1000; // 700 before, how long the background shows alone before the menu fades in
+const BG_SETTLE_MS = 1200; // how long the background shows alone before the menu fades in
 const splashStart = performance.now();
 
 Promise.all([
@@ -225,14 +229,35 @@ Promise.all([
   const elapsed = performance.now() - splashStart;
   const remaining = Math.max(0, MIN_SPLASH_MS - elapsed);
   setTimeout(() => {
-    hideSplash();
-    setTimeout(revealContent, BG_SETTLE_MS);
+    hideSplash(() => {
+      setTimeout(revealContent, BG_SETTLE_MS);
+    });
   }, remaining);
 });
 
-function hideSplash() {
+// Two-step exit: the logo fades out alone first, and only once that
+// finishes does the white background itself start fading away (see the
+// matching .splash-logo / #app-splash transitions in styles.css). onComplete
+// fires once the background has fully finished fading, so callers (the
+// BG_SETTLE_MS timer above) count from "splash is truly gone", not from
+// when the fade merely started.
+function hideSplash(onComplete) {
   const splash = document.getElementById('app-splash');
-  if (!splash) return;
-  splash.classList.add('splash-hidden');
-  splash.addEventListener('transitionend', () => splash.remove(), { once: true });
+  if (!splash) { onComplete?.(); return; }
+  const logo = splash.querySelector('.splash-logo');
+
+  function fadeBackground() {
+    splash.classList.add('splash-hidden');
+    splash.addEventListener('transitionend', () => {
+      splash.remove();
+      onComplete?.();
+    }, { once: true });
+  }
+
+  if (logo) {
+    logo.classList.add('logo-hidden');
+    logo.addEventListener('transitionend', fadeBackground, { once: true });
+  } else {
+    fadeBackground();
+  }
 }
