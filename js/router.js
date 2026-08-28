@@ -146,24 +146,30 @@ async function loadPage(page, push = true) {
     html = `<h1>Page not found</h1><p>${err.message}</p>`;
   }
 
-  setTimeout(() => {
-    content.innerHTML = html;
-    content.classList.remove('fading');
-    document.body.dataset.page = page;
-    bindPageLinks();  // re-bind, since #content's links are new DOM nodes
-    bindToggles();    // re-bind for whichever page just loaded; safe no-op on pages with no .toggle-test markup
-    bindFloorTabs();  // re-bind for whichever page just loaded; safe no-op on pages with no .floor-tabs markup
-    bindPlanDots();   // re-bind for whichever page just loaded; safe no-op on pages with no .plan-dot markup
-    bindPlanLinks();  // re-bind for whichever page just loaded; safe no-op on pages with no .plan-link markup
-
-    // re-run gallery init for whichever page just loaded; safe no-op on
-    // pages with no .carousel markup
-    window.GalleryEngine?.init();
-  }, FADE_MS);
-
   if (push) {
     history.pushState({ page }, '', `#${page}`);
   }
+
+  // Wrapped in a promise so callers (notably the initial startup splash
+  // handling below) can await "content is actually in the DOM" instead of
+  // guessing with their own timer.
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      content.innerHTML = html;
+      content.classList.remove('fading');
+      document.body.dataset.page = page;
+      bindPageLinks();  // re-bind, since #content's links are new DOM nodes
+      bindToggles();    // re-bind for whichever page just loaded; safe no-op on pages with no .toggle-test markup
+      bindFloorTabs();  // re-bind for whichever page just loaded; safe no-op on pages with no .floor-tabs markup
+      bindPlanDots();   // re-bind for whichever page just loaded; safe no-op on pages with no .plan-dot markup
+      bindPlanLinks();  // re-bind for whichever page just loaded; safe no-op on pages with no .plan-link markup
+
+      // re-run gallery init for whichever page just loaded; safe no-op on
+      // pages with no .carousel markup
+      window.GalleryEngine?.init();
+      resolve();
+    }, FADE_MS);
+  });
 }
 
 // Handle nav clicks
@@ -187,4 +193,28 @@ window.addEventListener('popstate', (e) => {
 bindPageLinks();
 const initialPage = location.hash.slice(1) || 'home';
 history.replaceState({ page: initialPage }, '', `#${initialPage}`);
-loadPage(initialPage, false);
+
+// Startup splash: index.html shows a full-screen #app-splash overlay (same
+// background/logo as the native OS splash) so this handoff reads as one
+// continuous launch instead of native-splash -> blank/unstyled flash ->
+// menu popping in. It's only removed once the home page is genuinely
+// ready — real content in the DOM (loadPage's promise), fonts loaded (no
+// FOUT), and a minimum display time so it never flickers on a fast load.
+const MIN_SPLASH_MS = 600;
+const splashStart = performance.now();
+
+Promise.all([
+  loadPage(initialPage, false),
+  (document.fonts && document.fonts.ready) || Promise.resolve()
+]).then(() => {
+  const elapsed = performance.now() - splashStart;
+  const remaining = Math.max(0, MIN_SPLASH_MS - elapsed);
+  setTimeout(hideSplash, remaining);
+});
+
+function hideSplash() {
+  const splash = document.getElementById('app-splash');
+  if (!splash) return;
+  splash.classList.add('splash-hidden');
+  splash.addEventListener('transitionend', () => splash.remove(), { once: true });
+}
