@@ -3,8 +3,8 @@
   "short_name": "Guide du Tournel v5",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1e1e2f",
-  "theme_color": "#1e1e2f",
+  "background_color": "#F4EFE4",
+  "theme_color": "#F4EFE4",
   "icons": [
     {
       "src": "./img/logo-192.png",
