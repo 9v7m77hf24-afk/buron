@@ -18,6 +18,14 @@
 </head>
 
 <body>
+  <!-- Startup splash overlay: covers the page until router.js confirms the
+       home page is actually rendered and fonts are loaded (see router.js).
+       Same background/logo as the native OS splash screen (manifest.json)
+       so the handoff between them looks like one continuous launch. -->
+  <div id="app-splash">
+    <img src="./img/logo-512-v3.png" alt="" class="splash-logo">
+  </div>
+
   <!-- Persistent background, never reloaded between pages -->
   <div class="background"></div>
 
