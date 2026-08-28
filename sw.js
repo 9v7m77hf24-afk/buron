@@ -1,4 +1,4 @@
-const CACHE_NAME = "guide-du-buron-v17";
+const CACHE_NAME = "guide-du-buron-v18";
 
 // App shell: the pages, styles, and scripts needed to run the app offline.
 // Keep this list in sync with actual filenames on disk. Even if a name is
@@ -28,9 +28,9 @@ const APP_SHELL = [
   "./img/logo.png",
   "./img/logo-192.png",
   "./img/logo-512.png",
-  "./img/logo-192-v3.png",
-  "./img/logo-512-v3.png",
-  "./img/logo-1024-v3.png",
+  "./img/logo-192-v2.png",
+  "./img/logo-512-v2.png",
+  "./img/logo-1024-v2.png",
   "./img/house.png",
   "./img/view1.jpg",
   "./img/icon1.png",
