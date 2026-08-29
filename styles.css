@@ -1,0 +1,571 @@
+/* ---------- index.html ------------*/
+/* ----------- home.html ------------*/
+
+/* https://whatismyviewport.com for Tablet Redmi SE */
+/* 1097px x 547px */
+/*  686px x 959px */
+
+/* ---------- Self-hosted fonts (offline-first, no CDN) ---------- */
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-500-italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-600-italic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader/newsreader-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/work-sans/work-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter — added for the "Option 2" font test (test-font.html: Newsreader
+   headings + Inter body). Kept side-by-side with Work Sans above rather
+   than replacing it: switching the body font back and forth during
+   testing is then just a one-line edit to --font-ui below, with no need
+   to touch this block either way. A browser only ever downloads the
+   weights that are actually used to render text on the page, so defining
+   both families here costs nothing at runtime by itself — see sw.js for
+   the one place that DOES force-download every listed file regardless of
+   use (the offline precache list), which is worth pruning once you've
+   settled on a font. */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- SINGLE SOURCE OF TRUTH FOR FONTS ----------
+     Every page and every stylesheet (guide.css, flore.css, leburon.css,
+     gastro.css) reads fonts through these two variables only — none of
+     them hardcode a font name. To try a different typeface app-wide,
+     change the value on the right here and nothing else. Currently set
+     to test-font.html's "Option 2" pairing (Newsreader + Inter). */
+  --font-ui: "Inter", system-ui, Roboto, "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Newsreader", serif;
+  /* Portrait width of the reference Redmi tablet (see viewport note above);
+     .page is pinned to this so it stays the same size in both orientations. */
+  --page-width: 686px;
+  --nav-clearance: 130px; /* matches #content's top padding, reserved for the logo */
+  --content-bottom-pad: 4%; /* matches #content's bottom padding */
+  --bottom-nav-height: 64px; /* .bottom-nav's rendered height (~48px) + breathing room */
+}
+
+/* ---------- Reset / base --------- */
+* {
+  box-sizing: border-box;
+  /* Kills the default Android/Chrome blue-gray flash shown on any
+     tappable element while pressed (buttons, links, .menu-item, etc.).
+     Desktop never shows this — it's a touch-only browser default, which
+     is why the laptop looked fine and the tablet didn't. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-ui);
+  color: #f0f0f5;
+}
+
+/* ---------- Persistent background ---------- */
+/* This element is created once in index.html and never removed,
+   so it never flashes/reloads between "page" changes. */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /*background: linear-gradient(to bottom, #1e1e2f, #2b2b45);*/
+  background-image: url("../img/view1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ---------- Startup splash overlay ---------- */
+/* Sits above everything (.nav is z-index:0, #content is z-index:1) until
+   router.js removes it once the home page is genuinely ready. Colors
+   match manifest.json's background_color / the native OS splash, so the
+   two hand off without a visible seam.
+
+   The logo and the white background fade on their own separate timelines
+   (see router.js's hideSplash): the logo fades out alone first, and only
+   once that finishes does the white background itself start fading away
+   to reveal the app underneath — a deliberate two-step exit rather than
+   both disappearing together. */
+#app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F4EFE4;
+  transition: opacity 0.9s ease;
+}
+
+#app-splash.splash-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-logo {
+  width: 45vw;
+  max-width: 260px;
+  display: block;
+  transition: opacity 0.7s ease;
+}
+
+.splash-logo.logo-hidden {
+  opacity: 0;
+}
+
+/* ---------- Header ---------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 0 0;/*1rem 2rem;*/
+/*background: rgba(30, 30, 47, 0.85);
+backdrop-filter: blur(8px);*/
+}
+
+/*.nav-logo-link { display: flex; align-items: center; */
+
+.nav-logo {
+  height: 120px;
+  display: block;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+  will-change: transform;
+}
+
+/* ---------- Content area ---------- */
+#content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  opacity: 1;
+  transition: opacity 0.2s ease;
+
+  color:black;
+  padding: var(--nav-clearance) 0 var(--content-bottom-pad) 0;
+}
+
+#content.fading {
+  opacity: 0;
+}
+
+/* Slower fade used only for the very first reveal of the home menu on
+   startup (see router.js's revealContent()) — normal page-to-page
+   navigation keeps the quicker 0.2s transition above so menu taps still
+   feel snappy. Removed again once the fade completes. */
+#content.initial-reveal {
+  transition: opacity 0.6s ease;
+}
+
+/* ---------- Bottom nav (portrait only, always visible) ---------- */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.8rem 0;
+  background: rgba(30, 30, 47, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+/* Landscape: no bottom bar — replaced by .home-fab on the left edge */
+@media (orientation: landscape) {
+  .bottom-nav {
+    display: none;
+  }
+}
+
+/* Home screen: no navigation chrome in either orientation */
+body[data-page="home"] .bottom-nav,
+body[data-page="home"] .home-fab {
+  display: none;
+}
+
+/* ---------- Landscape home button ---------- */
+.home-fab {
+  display: none;
+  position: fixed;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(30, 30, 47, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.15s ease;
+}
+
+.home-fab:hover {
+  opacity: 0.85;
+}
+
+.home-fab:active {
+  opacity: 0.7;
+  transform: translateY(-50%) scale(0.92);
+}
+
+.home-fab img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+@media (orientation: landscape) {
+  .home-fab {
+    display: flex;
+  }
+}
+
+/* For text nav_link only
+.nav-link {
+  color: #f0f0f5;
+  text-decoration: none;
+  font-weight: 600;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+  font-family: var(--font-ui);
+}
+*/
+
+.nav-link {
+  display: flex;
+  flex-direction: column; /* or row, depending on layout */
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.nav-link:active {
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* ---------- HOME MENU ---------- */
+.page_menu {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding:3% 5%;
+  margin:0 15%;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* MENU GRID */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 180px);
+  gap:20px;
+  justify-content: center;
+}
+
+/* ICON BUTTON */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 180px;
+  height: 110px;
+
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: white;
+
+  transition: 0.2s ease;
+}
+
+/* ICON */
+.menu-item img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+/* LABEL */
+.menu-item span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-family: var(--font-ui);
+}
+
+/* HOVER */
+.menu-item:hover {
+  background: rgba(0, 0, 0, 0.75);
+  transform: scale(1.05);
+}
+
+/* PRESSED — a touch-friendly press-down, separate from the hover lift
+   above so tapping doesn't feel like it's fighting the hover scale-up */
+.menu-item:active {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(0.96);
+}
+
+/* ---------- PAGES SETUP ---------- */
+.page {
+padding: clamp(16px, 4vw, 40px) clamp(16px, 5vw, 50px);
+text-align: justify;
+/* Dark glass + blur: readable over sky/grass/mountain photos alike */
+background: rgba(20, 24, 20, 0.62);
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+color: #F4EFE4;
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 4px;
+box-sizing: border-box;
+/* Fixed width in both orientations: fills the screen edge-to-edge in
+   portrait (viewport = --page-width) and leaves side margins revealing
+   the background image in landscape (viewport > --page-width). */
+max-width: var(--page-width);
+width: 100%;
+margin: calc(-1 * var(--nav-clearance)) auto calc(-1 * var(--content-bottom-pad)) auto;
+/* Starts at the very top of the screen (over the logo) and spans at
+   least one full screen height, with no background band top or bottom. */
+min-height: 100vh;
+min-height: 100dvh;
+}
+
+/* Bottom nav is fixed and portrait-only (see .bottom-nav above) — without
+   this, a page's last bit of content (timeline, gallery, floor plan...)
+   can render underneath it in portrait. Applied here on .page itself,
+   shared by every page, rather than repeated per-page in guide.css /
+   leburon.css / flore.css for each page's differently-named last element. */
+@media (orientation: portrait) {
+  .page {
+    padding-bottom: calc(clamp(16px, 4vw, 40px) + var(--bottom-nav-height, 64px) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.page h1 {
+  text-align: center;
+  font-size: clamp(20px, 4vw, 28px);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+.page p {
+  font-size: 15px;
+  font-family: var(--font-ui);
+  /* test-font.html sets this explicitly; production had no line-height at
+     all here, which was the other reason leburon.html's long paragraphs
+     read denser than the test mockup even with the same font. */
+  line-height: 1.55;
+}
+
+.page .subtitle {
+  text-align:center; font-size:12px; color:#c9c4b6; margin:0 0 22px 0;
+}
+
+ h2 {
+    margin:25px 0 10px 0;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+  }
+
+
+
+
+
+
+  /* GASTRO */
+  .page_gastro {
+padding: 30px 50px;
+text-align: justify;
+box-sizing: border-box;
+width: 959px;
+margin: 0 auto;
+color:white; 
+/*background: rgba(0, 0, 0, 0.55);*/
+
+}
+
+.page_gastro h1 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  /*font-size: clamp(10px, 4vw, 35px);*/
+
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: 0.02em;
+  color: white;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 1.5);
+  text-align: center;
+}
+
+/* Tablet Portrait - Content height */
+@media (orientation: portrait){
+  .page_gastro {
+    width: 686px;
+  }
+}
+
+/* Tablet Portrait - lift home menu toward the middle of the grass in
+   view1.jpg. background-size:cover on this landscape photo, shown on a
+   much taller portrait viewport, ends up scaled/cropped by HEIGHT (sides
+   get cropped, not top/bottom) — so the full vertical extent of the photo
+   maps 1:1 onto the screen's height, and the ~80%-down "middle of the
+   green" landmark lines up with ~80% of the viewport height too.
+   .page_menu uses align-items:flex-end, so extra bottom padding here
+   pushes the menu up without changing how it's centered horizontally. */
+@media (orientation: portrait) {
+  .page_menu {
+    padding-bottom: 15%;
+  }
+}
+
