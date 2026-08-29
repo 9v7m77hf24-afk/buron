@@ -1,4 +1,4 @@
-const CACHE_NAME = "guide-du-buron-v18";
+const CACHE_NAME = "guide-du-buron-v19";
 
 // App shell: the pages, styles, and scripts needed to run the app offline.
 // Keep this list in sync with actual filenames on disk. Even if a name is
