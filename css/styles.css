@@ -242,7 +242,7 @@
   --font-size-h1: 28px;                /* styles.css: .page h1, .page_gastro h1 */
   --font-size-h2: 22px;                /* styles.css: generic h2 */
   --font-size-h2-small: 16px;          /* guide.css: .fp-section h2 — between h2 and body */
-  --font-size-body: 15px;              /* styles.css: .page p */
+  --font-size-body: 15.2px;              /* styles.css: .page p */
   --font-size-base: 15.2px;            /* guide.css: .info-row, .toggle-test summary
                                            flore.css: .card-title */
   --font-size-small: 14.4px;           /* leburon.css: .date, .desc, .caption-bar, .expand-btn,
