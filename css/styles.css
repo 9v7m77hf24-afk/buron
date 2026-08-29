@@ -93,8 +93,60 @@
   font-display: swap;
 }
 
+/* Inter — added for the "Option 2" font test (test-font.html: Newsreader
+   headings + Inter body). Kept side-by-side with Work Sans above rather
+   than replacing it: switching the body font back and forth during
+   testing is then just a one-line edit to --font-ui below, with no need
+   to touch this block either way. A browser only ever downloads the
+   weights that are actually used to render text on the page, so defining
+   both families here costs nothing at runtime by itself — see sw.js for
+   the one place that DOES force-download every listed file regardless of
+   use (the offline precache list), which is worth pruning once you've
+   settled on a font. */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --font-ui: "Work Sans", system-ui, Roboto, "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  /* ---------- SINGLE SOURCE OF TRUTH FOR FONTS ----------
+     Every page and every stylesheet (guide.css, flore.css, leburon.css,
+     gastro.css) reads fonts through these two variables only — none of
+     them hardcode a font name. To try a different typeface app-wide,
+     change the value on the right here and nothing else. Currently set
+     to test-font.html's "Option 2" pairing (Newsreader + Inter). */
+  --font-ui: "Inter", system-ui, Roboto, "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Newsreader", serif;
   /* Portrait width of the reference Redmi tablet (see viewport note above);
      .page is pinned to this so it stays the same size in both orientations. */
@@ -446,6 +498,10 @@ min-height: 100dvh;
 .page p {
   font-size: 15px;
   font-family: var(--font-ui);
+  /* test-font.html sets this explicitly; production had no line-height at
+     all here, which was the other reason leburon.html's long paragraphs
+     read denser than the test mockup even with the same font. */
+  line-height: 1.55;
 }
 
 .page .subtitle {
