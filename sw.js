@@ -26,12 +26,11 @@ const APP_SHELL = [
   "./js/router.js",
 
   "./img/logo.png",
-  "./img/logo-192.png",
+  "./img/logo-192.png", // Remove old version later, keep v2
   "./img/logo-512.png",
   "./img/logo-192-v2.png",
   "./img/logo-512-v2.png",
   "./img/logo-1024-v2.png",
-  "./img/house.png",
   "./img/view1.jpg",
   "./img/icon1.png",
   "./img/icon2.png",
