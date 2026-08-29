@@ -17,7 +17,7 @@
   padding: 14px 4px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: var(--font-size-base);
   color: #F4EFE4;
 }
 
@@ -116,7 +116,7 @@
 .row-detail {
   color: rgba(244, 239, 228, 0.8);
   flex: 1 1 auto;
-  font-size:13.5px;
+  font-size: var(--font-size-detail);
 }
 
 .row-detail strong {
@@ -184,7 +184,7 @@
 .toggle-body p {
   margin: 12px 0 0;
   font-family: var(--font-ui);
-  font-size: 0.9rem;
+  font-size: var(--font-size-small);
   line-height: 1.5;
   color: #F4EFE4;
   text-align: justify;
@@ -207,7 +207,7 @@
   border: 1px solid rgba(255, 255, 255, 0.22);
   color: #fff;
   font-family: var(--font-ui);
-  font-size: 12.5px;
+  font-size: var(--font-size-label);
   font-weight: 600;
   padding: 7px 14px;
   border-radius: 20px;
@@ -232,7 +232,7 @@
 
 .fp-section h2 {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: var(--font-size-h2-small);
   font-weight: 600;
   color: #F4EFE4;
   margin: 0 0 12px 0;
@@ -250,7 +250,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #c9c4b6;
   font-family: var(--font-ui);
-  font-size: 12.5px;
+  font-size: var(--font-size-label);
   font-weight: 600;
   padding: 8px 4px;
   border-radius: 20px;
@@ -379,7 +379,7 @@
   background: rgba(20, 24, 20, 0.95);
   color: #F4EFE4;
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   padding: 6px 10px;
   border-radius: 6px;

@@ -70,7 +70,7 @@
   .desc {
     color: inherit;
     font-size: var(--font-size-small);
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
     font-family: var(--font-ui);
   }
@@ -140,7 +140,7 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     transition: background 0.15s ease, transform 0.1s ease;
   }
 
@@ -254,7 +254,7 @@
     right: 0;
     text-align: center;
     color: #ddd;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     font-family: var(--font-ui);
   }
 

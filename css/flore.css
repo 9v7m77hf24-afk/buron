@@ -10,7 +10,7 @@
   .subhead {
     color: inherit;
     opacity: 0.85;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     margin: 0;
     font-style: italic;
     text-align:justify;
@@ -79,7 +79,7 @@
 
   .card-title {
     color: var(--paper);
-    font-size: 0.95rem;
+    font-size: var(--font-size-base);
     font-weight: 600;
     text-align: center;
     margin: 0 0 10px 0;
@@ -132,7 +132,7 @@
     padding: 22px 10px 8px;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
     color: #fff;
-    font-size: 0.65rem;
+    font-size: var(--font-size-tiny);
     text-align: center;
   }
 
@@ -142,7 +142,7 @@
   }
 
   .card-label strong {
-    font-size: 0.85rem;
+    font-size: var(--font-size-label-lg);
     font-weight: 600;
     font-family: var(--font-ui);
   }
@@ -264,7 +264,7 @@
     padding: 0 20px 14px;
     max-width: 700px;
     line-height: 1.4;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     color: #fff;
     background: rgba(0,0,0,0.65);
     margin: 0 auto;

@@ -229,9 +229,42 @@
      even though the box holding them never changed size. Fixed px/rem
      values here instead, set to each clamp's former upper bound (what
      large screens were already getting). Change once here, applies
-     everywhere that uses the variable. */
-  --font-size-h1: 28px;
-  --font-size-small: 0.9rem; /* timeline .date/.desc + carousel .caption-bar (leburon.css) */
+     everywhere that uses the variable.
+
+     Below that, the same "one place to change it" treatment extended to
+     every other font-size across styles.css/leburon.css/guide.css/flore.css
+     — grouped by role, with genuinely-identical values (e.g. every 0.9rem)
+     collapsed onto one shared variable. Distinct values were kept
+     distinct (no value was changed to match another) even where they're
+     close, e.g. --font-size-base (guide.css .info-row, flore.css
+     .card-title — 0.95rem) vs --font-size-small (leburon.css/guide.css/
+     flore.css, several selectors — 0.9rem): those two still read very
+     slightly different sizes, exactly as before. See the file names
+     inline on each variable below for exactly which selector, in which
+     stylesheet, each one drives.
+
+     NOT included here on purpose: decorative icon-glyph sizes — the
+     carousel arrows (1.4rem/1.3rem), the modal × (1.1rem), and the
+     toggle +/− (1.1rem). Those size a single symbol inside a button, not
+     readable text, so they're left as local one-off values rather than
+     folded into a body-text scale. */
+  --font-size-h1: 28px;                /* styles.css: .page h1, .page_gastro h1 */
+  --font-size-h2: 22px;                /* styles.css: generic h2 */
+  --font-size-h2-small: 16px;          /* guide.css: .fp-section h2 — between h2 and body */
+  --font-size-body: 15px;              /* styles.css: .page p */
+  --font-size-base: 0.95rem;           /* guide.css: .info-row, .toggle-test summary
+                                           flore.css: .card-title */
+  --font-size-small: 0.9rem;           /* leburon.css: .date, .desc, .caption-bar, .expand-btn,
+                                                        .viewer .caption
+                                           guide.css: .toggle-body p
+                                           flore.css: .subhead, .modal-caption */
+  --font-size-detail: 13.5px;          /* guide.css: .row-detail */
+  --font-size-label: 12.5px;           /* guide.css: .plan-link, .floor-tab */
+  --font-size-caption: 12px;           /* styles.css: .page .subtitle
+                                           guide.css: .dot-tip */
+  --font-size-label-lg: 0.85rem;       /* flore.css: .card-label strong */
+  --font-size-tiny: 0.65rem;           /* flore.css: .card-label (unlabeled species name) */
+  --font-size-menu: 13px;              /* styles.css: .menu-item span */
 }
 
 /* ---------- Reset / base --------- */
@@ -511,7 +544,7 @@ body[data-page="home"] .home-fab {
 
 /* LABEL */
 .menu-item span {
-  font-size: 13px;
+  font-size: var(--font-size-menu);
   font-weight: 600;
   letter-spacing: 0.1em;
   font-family: var(--font-ui);
@@ -574,7 +607,7 @@ min-height: 100dvh;
 }
 
 .page p {
-  font-size: 15px;
+  font-size: var(--font-size-body);
   font-family: var(--font-ui);
   /* test-font.html sets this explicitly; production had no line-height at
      all here, which was the other reason leburon.html's long paragraphs
@@ -583,12 +616,12 @@ min-height: 100dvh;
 }
 
 .page .subtitle {
-  text-align:center; font-size:12px; color:#c9c4b6; margin:0 0 22px 0;
+  text-align:center; font-size: var(--font-size-caption); color:#c9c4b6; margin:0 0 22px 0;
 }
 
  h2 {
     margin:25px 0 10px 0;
-    font-size: 22px;
+    font-size: var(--font-size-h2);
     font-weight: 600;
     font-family: var(--font-serif);
     font-optical-sizing: auto;
@@ -613,8 +646,7 @@ color:white;
 
 .page_gastro h1 {
   margin-bottom: 30px;
-  font-size: 28px;
-  /*font-size: clamp(10px, 4vw, 35px);*/
+  font-size: var(--font-size-h1);
 
   font-family: var(--font-serif);
   font-weight: 600;
