@@ -204,11 +204,14 @@
 
 :root {
   /* ---------- SINGLE SOURCE OF TRUTH FOR FONTS ----------
-     Every page and every stylesheet (guide.css, flore.css, leburon.css,
-     gastro.css) reads fonts through these two variables only — none of
+     Every page and every .css stylesheet reads fonts through these two variables only — none of
      them hardcode a font name. To try a different typeface app-wide,
-     change the value on the right here and nothing else. Currently set
-     to test-font.html's "Option 3" pairing (Cormorant Garamond + Karla).
+     change the value on the right here and nothing else. 
+     Test pairing:
+     . Cormorant Garamond + Karla
+     . Newsreader + Inter
+     . Check if WorkSans can be deleted
+
      Note: test-font.html's .f3 also bumps its h2 to font-weight:700 and
      font-size:30px specifically — that override is NOT applied here, so
      headings still render at the site's existing weight/size. */
@@ -231,18 +234,6 @@
      large screens were already getting). Change once here, applies
      everywhere that uses the variable.
 
-     Below that, the same "one place to change it" treatment extended to
-     every other font-size across styles.css/leburon.css/guide.css/flore.css
-     — grouped by role, with genuinely-identical values (e.g. every 0.9rem)
-     collapsed onto one shared variable. Distinct values were kept
-     distinct (no value was changed to match another) even where they're
-     close, e.g. --font-size-base (guide.css .info-row, flore.css
-     .card-title — 0.95rem) vs --font-size-small (leburon.css/guide.css/
-     flore.css, several selectors — 0.9rem): those two still read very
-     slightly different sizes, exactly as before. See the file names
-     inline on each variable below for exactly which selector, in which
-     stylesheet, each one drives.
-
      NOT included here on purpose: decorative icon-glyph sizes — the
      carousel arrows (1.4rem/1.3rem), the modal × (1.1rem), and the
      toggle +/− (1.1rem). Those size a single symbol inside a button, not
@@ -252,9 +243,9 @@
   --font-size-h2: 22px;                /* styles.css: generic h2 */
   --font-size-h2-small: 16px;          /* guide.css: .fp-section h2 — between h2 and body */
   --font-size-body: 15px;              /* styles.css: .page p */
-  --font-size-base: 0.95rem;           /* guide.css: .info-row, .toggle-test summary
+  --font-size-base: 15.2px;            /* guide.css: .info-row, .toggle-test summary
                                            flore.css: .card-title */
-  --font-size-small: 0.9rem;           /* leburon.css: .date, .desc, .caption-bar, .expand-btn,
+  --font-size-small: 14.4px;           /* leburon.css: .date, .desc, .caption-bar, .expand-btn,
                                                         .viewer .caption
                                            guide.css: .toggle-body p
                                            flore.css: .subhead, .modal-caption */
@@ -262,8 +253,8 @@
   --font-size-label: 12.5px;           /* guide.css: .plan-link, .floor-tab */
   --font-size-caption: 12px;           /* styles.css: .page .subtitle
                                            guide.css: .dot-tip */
-  --font-size-label-lg: 0.85rem;       /* flore.css: .card-label strong */
-  --font-size-tiny: 0.65rem;           /* flore.css: .card-label (unlabeled species name) */
+  --font-size-label-lg: 13.5px;        /* flore.css: .card-label strong */
+  --font-size-tiny: 10.5px;            /* flore.css: .card-label (unlabeled species name) */
   --font-size-menu: 13px;              /* styles.css: .menu-item span */
 }
 
