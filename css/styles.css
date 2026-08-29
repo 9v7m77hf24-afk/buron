@@ -597,7 +597,7 @@ min-height: 100dvh;
   font-optical-sizing: auto;
 }
 
-.page p {
+.page > p {
   font-size: var(--font-size-body);
   font-family: var(--font-ui);
   /* test-font.html sets this explicitly; production had no line-height at
