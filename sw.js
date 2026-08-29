@@ -12,7 +12,6 @@ const APP_SHELL = [
   "./flore.html",
   "./gastronomie.html",
   "./activities.html",
-  "./contacts.html",
   "./guide.html",
   "./manifest.json",
 
