@@ -597,7 +597,29 @@ min-height: 100dvh;
   font-optical-sizing: auto;
 }
 
-.page > p {
+.page > p:not(.subhead) {
+  /* Was ".page p" (descendant selector). Same specificity (0,1,1) as any
+     other single-class + tag selector — including .desc/.date, which are
+     also <p> elements nested inside .page (.page > .timeline > .item >
+     .content_timeline > p.desc/p.date). Since .page p matched them too,
+     and specificity ties go by cascade order, this rule was silently
+     winning over .desc/.date's own font-size regardless of what
+     --font-size-small was set to. Restricting to direct children (>)
+     keeps this rule matching exactly the two intended body paragraphs
+     (leburon.html's "Notre histoire" text) while excluding anything
+     nested deeper, so .desc/.date's own rules can finally apply.
+
+     :not(.subhead) added on top of that: unlike .desc/.date, flore.css's
+     .subhead (e.g. "Les animaux qui vous pouvez trouver...") IS a direct
+     child of .page — <div class="page"><h2>...</h2><p class="subhead">.
+     The child-combinator restriction above doesn't exclude it on its own,
+     so it hit the exact same bug: .page > p (0,1,1) still outranked
+     .subhead alone (0,1,0) and silently overrode it. Excluding it here
+     lets .subhead's own font-size (--font-size-small) finally apply,
+     without needing to touch flore.css or fight specificity from the
+     other side. If any future page adds another one-off <p> class as a
+     direct child of .page that's meant to size itself independently,
+     it'll need the same :not(.classname) added here too. */
   font-size: var(--font-size-body);
   font-family: var(--font-ui);
   /* test-font.html sets this explicitly; production had no line-height at
