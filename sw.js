@@ -19,7 +19,6 @@ const APP_SHELL = [
   "./css/styles.css",
   "./css/leburon.css",
   "./css/flore.css",
-  "./css/gastro.css",
   "./css/guide.css",
 
   "./js/main.js",
