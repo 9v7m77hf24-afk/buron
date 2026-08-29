@@ -245,7 +245,7 @@
   --font-size-body: 15.2px;            /* styles.css: .page p */
   --font-size-base: 15.2px;            /* guide.css: .info-row, .toggle-test summary
                                            flore.css: .card-title */
-  --font-size-small: 12px;           /* leburon.css: .date, .desc, .caption-bar, .expand-btn,
+  --font-size-small: 14px;           /* leburon.css: .date, .desc, .caption-bar, .expand-btn,
                                                         .viewer .caption
                                            guide.css: .toggle-body p
                                            flore.css: .subhead, .modal-caption */
