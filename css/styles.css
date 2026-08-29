@@ -139,21 +139,99 @@
   font-display: swap;
 }
 
+/* Cormorant Garamond + Karla — added for the "Option 3" font test
+   (test-font.html: Cormorant Garamond headings + Karla body). Same
+   pattern as Inter above: defined alongside, not in place of, so
+   switching between any of the tested pairings is a one-line edit to
+   --font-ui / --font-serif with no CSS restructuring. */
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond/cormorant-garamond-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond/cormorant-garamond-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond/cormorant-garamond-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("../fonts/karla/karla-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Karla";
+  src: url("../fonts/karla/karla-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Karla";
+  src: url("../fonts/karla/karla-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Karla";
+  src: url("../fonts/karla/karla-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Karla";
+  src: url("../fonts/karla/karla-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* ---------- SINGLE SOURCE OF TRUTH FOR FONTS ----------
      Every page and every stylesheet (guide.css, flore.css, leburon.css,
      gastro.css) reads fonts through these two variables only — none of
      them hardcode a font name. To try a different typeface app-wide,
      change the value on the right here and nothing else. Currently set
-     to test-font.html's "Option 2" pairing (Newsreader + Inter). */
-  --font-ui: "Inter", system-ui, Roboto, "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Newsreader", serif;
+     to test-font.html's "Option 3" pairing (Cormorant Garamond + Karla).
+     Note: test-font.html's .f3 also bumps its h2 to font-weight:700 and
+     font-size:30px specifically — that override is NOT applied here, so
+     headings still render at the site's existing weight/size. */
+  --font-ui: "Karla", system-ui, Roboto, "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
   /* Portrait width of the reference Redmi tablet (see viewport note above);
      .page is pinned to this so it stays the same size in both orientations. */
   --page-width: 686px;
   --nav-clearance: 130px; /* matches #content's top padding, reserved for the logo */
   --content-bottom-pad: 4%; /* matches #content's bottom padding */
   --bottom-nav-height: 64px; /* .bottom-nav's rendered height (~48px) + breathing room */
+
+  /* ---------- FIXED FONT SIZES ----------
+     .page is a fixed --page-width in both orientations (see .page below),
+     so sizing text off vw via clamp() was actually scaling with the
+     device's full viewport width, not with .page itself — meaning
+     headings/timeline text rendered larger in landscape than portrait
+     even though the box holding them never changed size. Fixed px/rem
+     values here instead, set to each clamp's former upper bound (what
+     large screens were already getting). Change once here, applies
+     everywhere that uses the variable. */
+  --font-size-h1: 28px;
+  --font-size-small: 0.9rem; /* timeline .date/.desc + carousel .caption-bar (leburon.css) */
 }
 
 /* ---------- Reset / base --------- */
@@ -489,7 +567,7 @@ min-height: 100dvh;
 
 .page h1 {
   text-align: center;
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: var(--font-size-h1);
   font-family: var(--font-serif);
   font-weight: 600;
   font-optical-sizing: auto;

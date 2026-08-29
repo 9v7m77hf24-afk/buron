@@ -61,7 +61,7 @@
   .date {
     color: #e53228;
     font-weight: 600;
-    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    font-size: var(--font-size-small);
     margin: 0 0 4px 0;
     font-family: var(--font-serif);
     font-optical-sizing: auto;
@@ -69,8 +69,8 @@
 
   .desc {
     color: inherit;
-    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-    line-height: 1.55;
+    font-size: var(--font-size-small);
+    line-height: 1.5;
     margin: 0;
     font-family: var(--font-ui);
   }
@@ -122,7 +122,7 @@
     padding: clamp(8px, 2vw, 14px) clamp(10px, 3vw, 18px);
     background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
     color: #fff;
-    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    font-size: var(--font-size-small);
     display: flex;
     justify-content: space-between;
     align-items: center;
