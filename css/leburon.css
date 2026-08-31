@@ -18,7 +18,7 @@
     left: 50%;
     top: 12px;          /* starts just below the dot */
     bottom: -10px;      /* extends into the next item */
-    border-left: 2px dotted #B5603A; /*#D98A3D;*/
+    border-left: 2px dotted #D98A3D;
     transform: translateX(-50%);
 }
 
@@ -33,7 +33,7 @@
     top: 0;
     width: 10px;
     height: 10px;
-    background: #B5603A;/* #D98A3D;*/
+    background:#D98A3D;
     border-radius: 50%;
     transform: translateX(-50%);
     z-index: 1;
@@ -59,7 +59,7 @@
   }
 
   .date {
-    color: #B5603A; /*#D98A3D;*/
+    color: #D98A3D;
     font-weight: 600;
     font-size: var(--font-size-small);
     margin: 0 0 4px 0;
