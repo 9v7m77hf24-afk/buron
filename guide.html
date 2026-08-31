@@ -51,7 +51,8 @@
                 <span class="row-label">Électricité</span>
             </summary>
             <div class="toggle-body">
-                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Un second bl.</p>
+                <p>Coupure de électricité.</p>
+                 <button class="plan-link" data-floor="rdc" data-point="electricite">Voir sur le plan</button>
             </div>
         </details>
 
@@ -98,9 +99,13 @@
                 <span class="row-label">Trousses de secours</span>
             </summary>
             <div class="toggle-body">
-                <p>
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Un second bloc, pour vérifier que plusieurs toggles peuvent coexister sur la même page sans se gêner.
+                <p>La trousse de secours est placé dans l'armoir et contient les articles suivants:
+                    - article 1
+                    - article 2 
+                    - article 3
+                    - article 4   
                 </p>
+                <button class="plan-link" data-floor="rdc" data-point="secours">Voir sur le plan</button>
             </div>
         </details>
 
@@ -137,13 +142,23 @@
                 <button class="plan-dot" data-point="gaz" style="left: 18.0%; top: 68%;" data-label="Robinet de fermeture du gaz">
                     <span class="plan-dot-icon plan-dot-icon--gaz" aria-hidden="true"></span>
                 </button>
+
+                <!-- Électricité -->
+                <button class="plan-dot" style="left: 6.8%; top: 91.4%;" data-label="Coupure le électricité">
+                    <span class="plan-dot-icon plan-dot-icon--electricite" aria-hidden="true"></span>  
+                </button>
                 
                 <!-- Extincteur dot -->
                 <button class="plan-dot" data-point="extincteur" style="left: 70.7%; top: 95.5%;" data-label="Extincteur">
                     <span class="plan-dot-icon plan-dot-icon--flame" aria-hidden="true"></span>
                 </button>
-                <button class="plan-dot" data-point="extincteur" style="left: 20%; top: 83%;" data-label="Extincteur">
+                <button class="plan-dot" data-point="extincteur" style="left: 20%; top: 78.9%;" data-label="Extincteur">
                     <span class="plan-dot-icon plan-dot-icon--flame" aria-hidden="true"></span>
+                </button>
+
+                <!-- Trousses de Secours-->
+                <button class="plan-dot" style="left: 69.8%; top: 36.4%;" data-label="Trousses de secours">
+                    <span class="plan-dot-icon plan-dot-icon--secours" aria-hidden="true"></span>
                 </button>
             </div>
         </div>
