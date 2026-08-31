@@ -4,13 +4,15 @@
     --ink: #1a1a1a;
     --paper: #fcfcfc;
     --night: #2b2b45;
-    --accent: #e53228;
+    /* --accent now lives in styles.css :root — do not redeclare it here,
+       flore.css loads after styles.css so a local copy would silently
+       win and break the shared value app-wide. */
   }
 
   .subhead {
     color: inherit;
     opacity: 0.85;
-    font-size: var(--font-size-small);
+    font-size: 0.9rem;
     margin: 0;
     font-style: italic;
     text-align:justify;
@@ -31,28 +33,28 @@
   -webkit-overflow-scrolling: touch;
 }
 
-/* Click-to-scroll nav buttons, standard-gallery style: red circular arrows
-   overlaid on the left/right edges of the horizontal strip. */
+/* Click-to-scroll nav buttons — reads the shared ghost-button tokens
+   from styles.css so this always matches leburon.css's .car-btn. */
 .grid-prev,
 .grid-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  border: none;
+  width: var(--gallery-btn-size);
+  height: var(--gallery-btn-size);
+  border: var(--gallery-btn-border);
   border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  font-size: 1.4rem;
+  background: var(--gallery-btn-bg);
+  box-shadow: none;
+  color: var(--gallery-btn-color);
+  font-size: 1.1rem;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
   z-index: 3;
-  opacity: 0.9;
+  opacity: var(--gallery-btn-opacity-rest);
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
@@ -61,11 +63,12 @@
 
 .grid-prev:hover,
 .grid-next:hover {
-  opacity: 1;
+  opacity: var(--gallery-btn-opacity-hover);
 }
 
 .grid-prev:active,
 .grid-next:active {
+  opacity: var(--gallery-btn-opacity-active);
   transform: translateY(-50%) scale(0.92);
 }
 
@@ -79,7 +82,7 @@
 
   .card-title {
     color: var(--paper);
-    font-size: var(--font-size-base);
+    font-size: 0.95rem;
     font-weight: 600;
     text-align: center;
     margin: 0 0 10px 0;
@@ -132,7 +135,7 @@
     padding: 22px 10px 8px;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
     color: #fff;
-    font-size: var(--font-size-tiny);
+    font-size: 0.65rem;
     text-align: center;
   }
 
@@ -142,7 +145,7 @@
   }
 
   .card-label strong {
-    font-size: var(--font-size-label-lg);
+    font-size: 0.85rem;
     font-weight: 600;
     font-family: var(--font-ui);
   }
@@ -264,7 +267,7 @@
     padding: 0 20px 14px;
     max-width: 700px;
     line-height: 1.4;
-    font-size: var(--font-size-small);
+    font-size: 0.9rem;
     color: #fff;
     background: rgba(0,0,0,0.65);
     margin: 0 auto;

@@ -18,7 +18,7 @@
     left: 50%;
     top: 12px;          /* starts just below the dot */
     bottom: -10px;      /* extends into the next item */
-    border-left: 2px dotted #D98A3D;
+    border-left: 2px dotted var(--accent);
     transform: translateX(-50%);
 }
 
@@ -26,14 +26,14 @@
     display: none;
 }
 
-  /* the red dot marker on the line */
+  /* the accent-colored dot marker on the line */
   .mark {
     position: absolute;
     left: 50%;
     top: 0;
     width: 10px;
     height: 10px;
-    background: #D98A3D;
+    background: var(--accent);
     border-radius: 50%;
     transform: translateX(-50%);
     z-index: 1;
@@ -59,7 +59,7 @@
   }
 
   .date {
-    color: #D98A3D;
+    color: var(--accent);
     font-weight: 600;
     font-size: var(--font-size-small);
     margin: 0 0 4px 0;
@@ -132,52 +132,36 @@
     font-family: var(--font-ui);
   }
 
-  .expand-btn {
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: #fff;
-    border-radius: 6px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    font-size: var(--font-size-small);
-    transition: background 0.15s ease, transform 0.1s ease;
-  }
-
-  .expand-btn:hover {
-    background: #e53228;
-  }
-
-  .expand-btn:active {
-    background: #b8281f;
-    transform: scale(0.9);
-  }
+  /* .expand-btn removed — was only used by leburon.html/flore.html's
+     redundant "view fullscreen" corner button, itself removed since
+     tapping the photo already opens the fullscreen viewer (see
+     gallery-engine.js buildCarousel, which binds .slide img directly). */
 
   /* --- CAROUSEL ARROWS --- */
   .car-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
+    width: var(--gallery-btn-size);
+    height: var(--gallery-btn-size);
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(0,0,0,0.28);
+    border: var(--gallery-btn-border);
+    background: var(--gallery-btn-bg);
     box-shadow: none;
     font-size: 1rem;
-    color: rgba(255,255,255,0.75);
+    color: var(--gallery-btn-color);
     cursor: pointer;
     z-index: 5;
-    opacity: 0.55;
+    opacity: var(--gallery-btn-opacity-rest);
     transition: opacity 0.15s ease, transform 0.1s ease;
   }
 
   .car-btn:hover {
-    opacity: 0.9;
+    opacity: var(--gallery-btn-opacity-hover);
   }
 
   .car-btn:active {
-    opacity: 1;
+    opacity: var(--gallery-btn-opacity-active);
     transform: translateY(-50%) scale(0.9);
   }
 
@@ -208,7 +192,7 @@
   }
 
   .dot.active {
-    background: #D98A3D;
+    background: var(--accent);
   }
 
   /* --- FULLSCREEN VIEWER ---

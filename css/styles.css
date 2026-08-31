@@ -256,6 +256,31 @@
   --font-size-label-lg: 13.5px;        /* flore.css: .card-label strong */
   --font-size-tiny: 10.5px;            /* flore.css: .card-label (unlabeled species name) */
   --font-size-menu: 13px;              /* styles.css: .menu-item span */
+
+  /* ---------- SINGLE SOURCE OF TRUTH FOR ACCENT COLOR ----------
+     Every stylesheet that needs the app's accent color reads this
+     variable instead of hardcoding its own hex. Change it once here to
+     re-theme the whole app. */
+  --accent: #D98A3D;                   /* leburon.css: .mark, .date, .item::after,
+                                                        .dot.active
+                                           guide.css: .row-icon, .plan-dot,
+                                                        .plan-link, .floor-tab.active
+                                           flore.css: .card:focus-visible,
+                                                        .modal-close:hover/:active */
+
+  /* ---------- SINGLE SOURCE OF TRUTH FOR GALLERY NAV BUTTONS ----------
+     Shared "ghost" style for every carousel/gallery prev-next button in
+     the app — leburon.css's .car-btn (main photo carousel) and
+     flore.css's .grid-prev/.grid-next (species card-grid strips). Change
+     a value here and every gallery updates together, instead of each
+     .css file keeping its own copy of the same numbers. */
+  --gallery-btn-size: 34px;
+  --gallery-btn-border: 1px solid rgba(255,255,255,0.25);
+  --gallery-btn-bg: rgba(0,0,0,0.28);
+  --gallery-btn-color: rgba(255,255,255,0.75);
+  --gallery-btn-opacity-rest: 0.55;
+  --gallery-btn-opacity-hover: 0.9;
+  --gallery-btn-opacity-active: 1;
 }
 
 /* ---------- Reset / base --------- */
