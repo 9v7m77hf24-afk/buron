@@ -24,6 +24,15 @@
   position: relative;
 }
 
+/* Per-species carousels that only exist to feed GalleryEngine.open('gN') —
+   they hold the slide markup but are never shown inline. Tapping a card's
+   thumbnail opens the shared fullscreen .viewer directly at that photo,
+   with no intermediate modal. See gallery-engine.js's "Direct-open
+   carousels" section for the full contract. */
+.gallery-hidden {
+  display: none;
+}
+
 .card-grid {
   display: flex;
   gap: 20px;
@@ -156,9 +165,12 @@
   }
 
   /* --- Modal (native <dialog>) ---
-     Full-screen takeover, same idea as leburon.html's fullscreen .viewer:
-     fills the viewport, shows the whole photo via object-fit:contain
-     (never cropped), dark theme throughout. */
+     No longer used by flore.html's species galleries as of the
+     direct-open-to-.viewer change (card tap now opens the shared
+     leburon.html-style fullscreen viewer directly — see .gallery-hidden
+     above and gallery-engine.js's "Direct-open carousels" section).
+     Left in place only in case another page still uses .modal-box/
+     .modal-close for an unrelated dialog; safe to delete if not. */
   dialog.modal-box {
     display: none;
     position: fixed;

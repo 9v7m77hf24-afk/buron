@@ -91,6 +91,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 3;
+    touch-action: pan-y; /* let JS own horizontal drags, browser keeps vertical scroll */
   }
 
   .slide {
@@ -112,6 +113,8 @@
     object-fit: cover;
     display: block;
     cursor: pointer;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   .caption-bar {
