@@ -92,6 +92,11 @@
   mask-image: url("../img/plancha.svg");
 }
 
+.row-icon--qr {
+  -webkit-mask-image: url("../img/qr.svg");
+  mask-image: url("../img/qr.svg");
+}
+
 
 
 
@@ -121,6 +126,130 @@
 .row-detail strong {
   color: #F4EFE4;
   font-weight: 700;
+}
+
+/* ---------- Wifi QR trigger + dialog ----------
+   Small round button appended to the Wifi row only — tapping it opens the
+   QR dialog directly; the Wifi row itself never becomes a toggle. Matches
+   .plan-link's ghost-button coloring (rgba(0,0,0,0.35) background, subtle
+   border) but circular, sized for a single icon rather than text. */
+.qr-trigger {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.qr-trigger:hover {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.qr-trigger:active {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(0.92);
+}
+
+/* .row-icon already sets size/mask plumbing; only the color needs
+   overriding here since a bare accent-on-transparent icon reads clearly
+   against this button's dark fill, same as it does on the flat list. */
+.qr-trigger .row-icon {
+  background-color: var(--accent);
+}
+
+/* Compact centered dialog — deliberately not reusing .modal-box (that's
+   sized/positioned for the full-screen photo viewer, wrong shape for a
+   small QR + text card). */
+dialog.qr-dialog {
+  border: none;
+  border-radius: 14px;
+  padding: 0;
+  background: rgba(20, 24, 20, 0.94);
+  color: #F4EFE4;
+  max-width: 320px;
+  width: calc(100% - 48px);
+}
+
+dialog.qr-dialog::backdrop {
+  background: rgba(10, 10, 20, 0.75);
+}
+
+.qr-dialog-inner {
+  padding: 24px 24px 20px;
+  text-align: center;
+  position: relative;
+}
+
+/* .qr-dialog-inner > form is display:contents so its .modal-close child
+   positions against .qr-dialog-inner itself, same trick .modal-box uses. */
+.qr-dialog-inner > form {
+  display: contents;
+}
+
+.qr-dialog h2 {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  margin: 0 0 16px;
+  font-weight: 600;
+}
+
+.qr-image-wrap {
+  /* QR codes need real light/dark contrast to scan reliably — a dark-glass
+     background (like the rest of the app) would kill that, so this stays
+     a plain white card regardless of theme. */
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.qr-image-wrap img {
+  display: block;
+  width: 180px;
+  height: 180px;
+}
+
+.qr-fallback {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(244, 239, 228, 0.85);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.qr-fallback div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.qr-fallback span:first-child {
+  color: rgba(244, 239, 228, 0.55);
+}
+
+.qr-fallback strong {
+  user-select: all; /* tap-and-hold to select/copy on mobile, as a manual-entry fallback */
+  font-weight: 700;
+  color: #F4EFE4;
+}
+
+.qr-hint {
+  margin-top: 14px;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  color: rgba(244, 239, 228, 0.5);
 }
 
 /* ---------- Toggle rows: same row look, plus disclosure behavior ---------- */
