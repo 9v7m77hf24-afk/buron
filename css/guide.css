@@ -189,6 +189,16 @@
   text-align: justify;
 }
 
+.toggle-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
 /* "Voir sur le plan" link inside a toggle body — jumps to the floor plan
    section, switches to the right floor tab, and highlights the matching
    dot (see bindPlanLinks in router.js). */
