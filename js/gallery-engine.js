@@ -1,17 +1,17 @@
 // GalleryEngine — shared carousel + fullscreen-viewer behavior for any page
 // that follows the markup contract below. Currently used by leburon.html
-// (one carousel) and flore.html (35 carousels, one per species <dialog>,
-// all sharing one .viewer). Drop the same markup into any future page and
+// (one visible carousel) and flore.html (42 hidden per-species carousels,
+// one shared .viewer). Drop the same markup into any future page and
 // GalleryEngine.init() (already called after every route change by
 // router.js) picks it up automatically — no page-specific JS required.
 //
-// Markup contract, all class-based (no IDs are read by this file):
+// Markup contract, all class-based (no IDs are read by this file, except
+// for the optional id-based direct-open lookup described below):
 //
 //   <div class="carousel">
 //     <div class="carousel-track">
 //       <div class="slide active" data-index="0">
 //         <img src="..." alt="Shown as the viewer caption">
-//         <div class="caption-bar"><button class="expand-btn"></button></div>
 //       </div>
 //       <div class="slide" data-index="1">...</div>
 //     </div>
@@ -22,9 +22,9 @@
 //                                               <!-- .carousel; omit for a -->
 //                                               <!-- single-photo gallery -->
 //
-// A page gets the click/keyboard-driven fullscreen lightbox for free by
-// also including exactly one shared, page-level viewer (multiple carousels
-// may all open the same one, as on flore.html):
+// A page gets the click/keyboard/swipe-driven fullscreen lightbox for free
+// by also including exactly one shared, page-level viewer (multiple
+// carousels may all open the same one, as on flore.html):
 //
 //   <dialog class="viewer">
 //     <button class="close">&times;</button>
@@ -37,6 +37,30 @@
 // The .viewer is optional — a page with only .carousel markup and no
 // .viewer still gets a working prev/next/dots carousel, just no
 // click-to-expand lightbox.
+//
+// --- Direct-open carousels (flore.html's species galleries) ---
+//
+// A carousel doesn't have to be visible on the page to be usable — it can
+// exist purely as a data source that's opened straight into the fullscreen
+// .viewer, skipping the inline prev/next/dots UI entirely. Give it an id
+// and hide it with CSS (see .gallery-hidden in flore.css):
+//
+//   <div class="carousel gallery-hidden" id="g1">
+//     <div class="carousel-track">
+//       <div class="slide active" data-index="0">
+//         <img src="..." alt="Per-photo caption shown in the viewer">
+//       </div>
+//     </div>
+//   </div>
+//
+// Then trigger it from anywhere (typically a thumbnail's onclick) with:
+//
+//   GalleryEngine.open('g1')        // opens at the first photo
+//   GalleryEngine.open('g1', 2)     // opens at a specific photo index
+//
+// car-btn/dots markup is pointless on a hidden carousel (nothing ever
+// renders it) and can be omitted — prev/next/swipe/keyboard navigation
+// once inside the fullscreen viewer all come from the .viewer itself.
 //
 // Horizontal card strips (flore.html's .card-grid galleries) get
 // click-to-scroll buttons independently of the carousel/viewer markup above:
@@ -55,6 +79,7 @@
 
 window.GalleryEngine = (function () {
   let keydownHandler = null; // tracks the listener so a re-init doesn't stack duplicates on document
+  let instancesById = {};    // populated fresh by init() each route load; keys are carousel element ids
 
   function buildCarousel(carouselEl, viewerApi) {
     const slides = Array.from(carouselEl.querySelectorAll('.slide'));
@@ -97,8 +122,30 @@ window.GalleryEngine = (function () {
 
     // swipe support
     let startX = 0;
-    track?.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+    let startY = 0;
+    let dragging = false;
+
+    track?.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true;
+    }, { passive: true });
+
+    track?.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      // once the drag is clearly horizontal, stop the page/viewer from also
+      // scrolling during the swipe — this is what lets the gesture actually
+      // reach touchend instead of being taken over by the browser/WebView
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+        e.preventDefault();
+      }
+    }, { passive: false }); // must be non-passive for preventDefault to have any effect
+
     track?.addEventListener('touchend', (e) => {
+      if (!dragging) return;
+      dragging = false;
       const diff = e.changedTouches[0].clientX - startX;
       if (diff > 50) goTo(current - 1);
       if (diff < -50) goTo(current + 1);
@@ -164,6 +211,40 @@ window.GalleryEngine = (function () {
 
     viewerEl.addEventListener('click', (e) => {
       if (e.target === viewerEl) close();
+    });
+
+    // swipe support inside the fullscreen viewer itself — needed because a
+    // direct-open carousel (see GalleryEngine.open) is hidden and has no
+    // visible .carousel-track of its own to swipe on; the viewer is the
+    // only surface the user ever actually touches for those galleries.
+    // Same touchstart/touchmove/touchend shape as buildCarousel()'s track
+    // swipe below, just driving `owner` instead of a local goTo().
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+
+    viewerEl.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true;
+    }, { passive: true });
+
+    viewerEl.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+        e.preventDefault(); // stop the browser treating this as a page/dialog scroll
+      }
+    }, { passive: false });
+
+    viewerEl.addEventListener('touchend', (e) => {
+      if (!dragging) return;
+      dragging = false;
+      if (!owner) return;
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 50) { owner.goTo(owner.current - 1); owner.openInViewer(owner.current); }
+      if (diff < -50) { owner.goTo(owner.current + 1); owner.openInViewer(owner.current); }
     });
 
     return {
@@ -320,6 +401,13 @@ window.GalleryEngine = (function () {
     const instances = carouselEls.map(el => buildCarousel(el, viewerApi)).filter(Boolean);
     if (instances.length === 0) return;
 
+    // rebuild the id lookup fresh each init() — old ids would otherwise
+    // point at detached elements from the previous route's DOM
+    instancesById = {};
+    instances.forEach(inst => {
+      if (inst.carouselEl.id) instancesById[inst.carouselEl.id] = inst;
+    });
+
     // the carousel currently visible on screen (e.g. the open <dialog>'s
     // carousel, or the only carousel on a single-gallery page like leburon.html)
     function getVisibleInstance() {
@@ -347,7 +435,17 @@ window.GalleryEngine = (function () {
     document.addEventListener('keydown', keydownHandler);
   }
 
-  return { init };
+  // Opens a carousel (visible or hidden) straight into the fullscreen
+  // viewer at the given photo index, without needing that carousel's own
+  // prev/next/dots to have been visible or interacted with first. Silently
+  // does nothing if the id isn't found or the page has no .viewer — the
+  // markup contract above explains why both are always expected to exist
+  // for a direct-open gallery.
+  function open(id, index = 0) {
+    instancesById[id]?.openInViewer(index);
+  }
+
+  return { init, open };
 })();
 
 // Run immediately if this script is loaded normally (e.g. direct <script> tag execution)
