@@ -309,7 +309,7 @@
   height: 25px;
   border-radius: 50%;
   background: var(--accent);
-  border: 2px solid #fff;
+  border: 2px solid black/* #fff;*/
   padding: 0;
   cursor: pointer;
   box-shadow: 0 0 0 4px rgba(229, 50, 40, 0.25);
