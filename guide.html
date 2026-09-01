@@ -8,6 +8,9 @@
             <span class="row-icon row-icon--wifi" aria-hidden="true"></span>
             <span class="row-label">Wifi</span>
             <span class="row-detail">Guest &middot; Paradis1427 (13.5)</span>
+            <button class="qr-trigger" aria-label="Afficher le QR code Wifi" onclick="document.getElementById('wifiQr').showModal()">
+                <span class="row-icon row-icon--qr" aria-hidden="true"></span>
+            </button>
         </div>
 
         <div class="info-row">
@@ -122,6 +125,25 @@
         </details>
 
     </div>
+
+    <!-- Wifi QR dialog — triggered by the .qr-trigger button in the Wifi
+         row above. Closed via .modal-close, same generic close-button
+         binding gallery-engine.js's buildModalCloseButtons() already wires
+         for every dialog on the page, not just galleries. -->
+    <dialog class="qr-dialog" id="wifiQr">
+        <div class="qr-dialog-inner">
+            <form method="dialog"><button class="modal-close" aria-label="Fermer">✕</button></form>
+            <h2>Se connecter au Wifi</h2>
+            <div class="qr-image-wrap">
+                <img src="./img/wifi-qr.png" alt="QR code Wifi Guest">
+            </div>
+            <div class="qr-fallback">
+                <div><span>Réseau</span><strong>Guest</strong></div>
+                <div><span>Mot de passe</span><strong>Paradis1427</strong></div>
+            </div>
+            <p class="qr-hint">Scanner avec l'appareil photo du téléphone (Android &amp; iPhone)</p>
+        </div>
+    </dialog>
     
     <!-- House Plan -->
     <!-- Use doc/guide-tech/dot-picker.html to calculate the position of the dot automatically -->
