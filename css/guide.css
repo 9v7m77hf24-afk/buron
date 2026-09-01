@@ -309,7 +309,7 @@
   height: 25px;
   border-radius: 50%;
   background: var(--accent);
-  border: 2px solid black; /* #fff;*/
+  border: 2px solid rgba(20, 24, 20, 0.9); /* #fff;*/
   padding: 0;
   cursor: pointer;
   box-shadow: 0 0 0 4px rgba(229, 50, 40, 0.25);
@@ -344,7 +344,7 @@
   margin: auto;
   width: 15px;
   height: 15px;
-  background-color: black; /*#fff;*/
+  background-color: rgba(20, 24, 20, 0.9); /*#fff;*/
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
